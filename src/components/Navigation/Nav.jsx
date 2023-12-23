@@ -35,6 +35,9 @@ function Nav() {
               <FaSearch className="sIcon"/>
 
             </li>
+            <li className="start"> 
+              <NavLink className="login" > GetStarted</NavLink>
+            </li>
           </ul>
         </div>
       </nav>
