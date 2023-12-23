@@ -56,8 +56,13 @@ function Footer() {
         <FaInstagramSquare />
         <FaTwitter />
         <FaYoutube />
+
+        <h6>Email:ebook2998@gmail.com</h6>
+        <h6>Tel: 01-XXXXXX</h6>
       </div>
     </div>
+
+    
         
 
         <p>&copy; 2023 Your Ebook Website. All rights reserved.</p>

@@ -3,6 +3,8 @@ import { NavLink } from "react-router-dom";
 import "./Nav.css";
 import { IoMdHome } from "react-icons/io";
 import { MdExploreOff } from "react-icons/md";
+import { FaSearch } from "react-icons/fa";
+
 
 
 function Nav() {
@@ -29,9 +31,9 @@ function Nav() {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/search" className ={ ({isActive})=> `${isActive? "yes-nav-text" : "no-nav-text"}`}>
-                Search
-              </NavLink>
+              <input type="text" className="search" placeholder="Search"/>
+              <FaSearch className="sIcon"/>
+
             </li>
           </ul>
         </div>

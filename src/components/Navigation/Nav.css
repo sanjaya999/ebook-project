@@ -69,4 +69,11 @@ ul.navlink {
 .icons{
   width: 20px;
   height: 20px;
+
+}
+
+.sIcon{
+  color: white;
+  margin-left: 15px;
+  
 }
