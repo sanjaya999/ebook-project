@@ -7,6 +7,8 @@ import Nav from './components/Navigation/Nav';
 import Home from './components/Home/Home';
 import Explore from './components/Explore/Explore';
 import Top from './components/Top Picks/Top';
+import Login from './components/Login/Login'; 
+import Register from './components/Login/Register.jsx';
 
 const App = () => (
   <Router>
@@ -16,6 +18,7 @@ const App = () => (
         <Route path="Home" element={<Home />} />
         <Route path="Explore" element={<Explore />} />
         <Route path="Top" element={<Top />} />
+        <Route path='GetStarted' element={<Register />} />
       </Route>
     </Routes>
   </Router>
