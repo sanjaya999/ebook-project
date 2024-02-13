@@ -36,7 +36,7 @@ function Nav() {
 
             </li>
             <li className="start"> 
-              <NavLink  to="/GetStarted" className="login" > GetStarted</NavLink>
+              <NavLink  to="/Login" className="login" > Login</NavLink>
             </li>
           </ul>
         </div>
