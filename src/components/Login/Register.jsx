@@ -1,19 +1,22 @@
-import React, { useState } from 'react';
-
+import React, { useEffect, useState } from 'react';
+import axios from 'axios'
 import { Link } from 'react-router-dom';
 
 
 
 
 function Register() {  
-
+ 
   const [userRegistration, setuserRegistration] = useState({
 
     fullname : "",
     username :"",
     email :"",
     password :""
-  });
+  }
+  
+  );
+
 
 const handleInput = (e)=>{
     const {name , value} = e.target;
@@ -24,9 +27,20 @@ const handleInput = (e)=>{
 }
 
 
-const handleSubmit=(e)=>{
+
+
+const handleSubmit= async(e)=>{
   e.preventDefault();
   console.log(userRegistration); // if we are getting or not
+
+  //send data
+  try {
+    const response = await axios.post('api/Register',setuserRegistration);
+    console.log("registration successfull",response.data)
+  } catch (error) {
+    console.log("registration failed",error.response.data)
+    
+  }
 
 }
   return (
