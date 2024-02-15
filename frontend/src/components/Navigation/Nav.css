@@ -1,0 +1,100 @@
+@font-face {
+  font-family: sans;
+  src: url(../Open_Sans/OpenSans-Italic-VariableFont_wdth\,wght.ttf);
+}
+
+body{
+  margin: 0;
+  font-family: sans;
+}
+header {
+  background-color: #333;
+  height: auto;
+ 
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+}
+
+.navigation {
+  width: 100%;
+  max-width: 1200px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+ul.navlink {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.navlink li {
+  margin-right: 90px;
+}
+
+
+.no-nav-text {
+  text-decoration: none;
+  color: white;
+}
+
+
+.yes-nav-text {
+  text-decoration: underline;
+  color: rgba(240, 51, 51, 0.678);
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .navigation {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  ul.navlink {
+    margin-top: 10px;
+  }
+
+  .navlink li {
+    margin: 0;
+    margin-bottom: 10px;
+  }
+}
+
+.icons{
+  width: 20px;
+  height: 20px;
+
+}
+
+.sIcon{
+  color: white;
+  margin-left: 15px;
+  }
+
+  .search{
+     border-color: rgba(240, 51, 51, 0.678);
+     height: 3vh ;
+     width: 250px;
+     border-radius: 10px;
+
+  }
+  .search::placeholder{
+    font-family: sans;
+    font-size:min(1.5vh) ;
+  }
+  
+  .login{
+    text-decoration: none;
+    font-family: sans;
+    color: white;
+    border: 1px solid rgba(240, 51, 51, 0.678) ;
+    padding: 8px;
+    border-radius: 10px;
+    margin-top: 20px;
+  }
