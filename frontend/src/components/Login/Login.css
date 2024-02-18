@@ -3,8 +3,106 @@
     src: url(../Open_Sans/OpenSans-Italic-VariableFont_wdth\,wght.ttf);
   }
 
-h2{
-    background-color: blue;
-}
+body{
+  margin : 0;
+  padding : 0;
   
 
+}
+
+.middle{
+   
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   
+   height:50vh ;
+   background-color:white;
+   
+   
+}
+
+.middle h2{
+  text-align: center;
+  
+  border-bottom: 1px solid rgb(207, 38, 38);
+}
+
+.middle field{
+  padding: 0 40px;
+  box-sizing: border-box;
+}
+ 
+form field{
+  position: relative;
+  border-bottom: 2px solid;
+  margin : 30px 0 ;
+
+}
+
+form .field{
+
+position: relative;
+border-bottom: 1px solid rgb(207, 38, 38);
+margin: 30px 0;
+}
+
+
+.field input{
+  width: 100%;
+  margin-top: 5px;
+  padding: 5px 5px;
+  height: 4vh;
+  font-size: 16px;
+  border: none; 
+  background: none;
+  outline: none;
+  
+}
+
+
+.field label {
+  position: absolute;
+  
+  left: 5px;
+  color: rgb(207, 38, 38);
+  font-size: 16px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  
+
+}
+
+button{
+  width:100%;
+  height:4vh;
+  border: 1px solid rgb(20, 5, 5);
+  border-radius: 15px;
+  font-size: 15px;
+  font-weight: 700;
+  background-color: rgb(243, 94, 94);
+  cursor: pointer;
+}
+
+button:hover{
+  border-color: rgb(47, 134, 44);
+  border-radius: 5px;
+  
+  transition: .5s;
+}
+
+.register{
+  margin: 30px;
+  text-align: center;
+}
+
+h3{
+  font-size: 15px;
+  color: #666666;
+}
+
+.register .a{
+  text-decoration: none;
+  color: rgb(207, 38, 38);
+
+}
