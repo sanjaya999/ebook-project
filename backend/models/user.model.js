@@ -5,6 +5,12 @@ import bcrypt from "bcrypt"
 const userSchema = new Schema({
 
    
+    fullName : {
+        type : String,
+        requried : true,
+        trim : true,
+        index : true
+    },
 
     email : {
         type : String,
@@ -15,20 +21,14 @@ const userSchema = new Schema({
         
     },
 
-    fullName : {
-        type : String,
-        requried : true,
-        trim : true,
-        index : true
-    },
-
-    profile : {
-        type : String,
-    },
-
     password : {
         type : String,
         required : [true , "Password is required"]
+    },
+
+     
+    profile : {
+        type : String,
     },
 
     refreshToken : {

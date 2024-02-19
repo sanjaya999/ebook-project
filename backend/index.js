@@ -10,7 +10,7 @@ dotenv.config({
 
 
 
-const DB_NAME = "ebook";
+const DB_NAME = "ebook"
 const connectDB = async()=>{
     try{
         const connectionInstance = await mongoose.connect(`${process.env.MONGODB_URI}/${DB_NAME}`)
@@ -26,7 +26,7 @@ const connectDB = async()=>{
 
 
 connectDB().then(()=>{
-    app.listen(process.env.PORT || 8000 ,()=>{
+    app.listen(process.env.PORT || 5000 ,()=>{
         console.log(`server is running at port ${process.env.PORT}`)
     })
 })
