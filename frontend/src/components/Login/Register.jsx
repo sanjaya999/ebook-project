@@ -10,16 +10,19 @@ function Register() {
   const [userRegistration, setuserRegistration] = useState({
 
     fullname : "",
-    username :"",
+    
     email :"",
-    password :""
+    password :"",
+    profile : null
   }
   
   );
 
 
 const handleInput = (e)=>{
-    const {name , value} = e.target;
+    const {name , value ,files} = e.target;
+
+    const inputValue = name == "profile"?[0]:value;
     setuserRegistration({
       ...userRegistration,
        [name] : value
@@ -35,7 +38,7 @@ const handleSubmit= async(e)=>{
 
   //send data
   try {
-    const response = await axios.post('api/Register',userRegistration);
+    const response = await axios.post('http://localhost:5000/api/v1/user/register',userRegistration);
     console.log("registration successfull",response.data)
   } catch (error) {
     console.log("registration failed",error.response.data)
@@ -53,12 +56,7 @@ const handleSubmit= async(e)=>{
             onChange={handleInput} id='fullname'  />
         </div>
 
-        <div>
-            <label htmlFor="username" className='label'>Username</label>
-            <input  type="text" name='username' 
-            value={userRegistration.username} className='input'
-            onChange={handleInput} id='username'  />
-        </div>
+
 
         <div>
             <label htmlFor="email" className='label'>Email</label>
@@ -72,6 +70,11 @@ const handleSubmit= async(e)=>{
             <input type="password" name='password' 
              value={userRegistration.password} className='input'
              onChange={handleInput} id='password'  />
+        </div>
+
+        <div>
+          <label htmlFor="profile" className='profile'>Profile</label>
+          <input type="file" name="profile" value={userRegistration.files} onChange={handleInput} />
         </div>
 
         <div>
