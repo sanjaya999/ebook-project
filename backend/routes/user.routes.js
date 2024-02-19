@@ -8,7 +8,7 @@ const router = Router();
 router.route("/register").post(upload.fields([
     {
         name : "profile",
-        max : 1
+        maxCount : 1
     }
 ]),
 registerUser)
