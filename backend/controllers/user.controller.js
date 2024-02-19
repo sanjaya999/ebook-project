@@ -3,6 +3,7 @@ import {ApiError} from "../utils/apiError.js"
 import {User} from "../models/user.model.js"
 import {uploadOnCloudinary} from "../utils/cloudinary.js"
 import { ApiResponse } from "../utils/apiResponse.js";
+import mongoose from "mongoose";
 
 
 const registerUser = asyncHandler(async(req,res) => {
@@ -28,25 +29,25 @@ const registerUser = asyncHandler(async(req,res) => {
         }
 
        //req.body gives access by express and req.files is by multer middleware
-         const profileLocalPath = req.files?.profile[0]?.path;
+       const profileLocalPath = req.files?.profile?.[0]?.path;
         
-         if(!profileLocalPath){
-            throw new ApiError(400 , "profile file is required");
+        //  if(!profileLocalPath){
+        //     throw new ApiError(400 , "profile file is required");
 
-         }
+        //  }
 
-          const profile = await uploadOnCloudinary(avatarLocalPath)
+        //   const profile = await uploadOnCloudinary(avatarLocalPath)
 
-        if(!profile){
-            throw new ApiError(400 , "profile is requried")
-        }
+        // if(!profile){
+        //     throw new ApiError(400 , "profile is requried")
+         //}
 
-        const users =   await User.create({
+        const user =   await User.create({
             fullName ,
             
             email,
             password,
-            profile : profile.url,
+            // profile : profile.url,
             
 
         })
