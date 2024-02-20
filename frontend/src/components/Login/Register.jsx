@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import { Link } from 'react-router-dom';
-
+import "./Register.css"
+import "../book.png";
 
 
 
@@ -47,10 +48,14 @@ const handleSubmit= async(e)=>{
 
 }
   return (
-    <div>
+    <div className='wholeF'>
+      <img src="book.png" alt="" />
        <form action="" onSubmit={handleSubmit} >
+       <h1 className='text'>Register</h1>
+
+
         <div className='fullName'>
-            <label htmlFor="fullname" className='label'>Full Name</label>
+            <label htmlFor="fullname" className='label'>Full Name</label><br />
             <input type="text" name='fullname'
             value={userRegistration.fullname} className='input'
             onChange={handleInput} id='fullname'  />
@@ -58,32 +63,29 @@ const handleSubmit= async(e)=>{
 
 
 
-        <div>
-            <label htmlFor="email" className='label'>Email</label>
+        <div className='email'>
+            <label htmlFor="email" className='label'>Email</label><br />
             <input  type="text" name='email' 
              value={userRegistration.email}  className='input'
              onChange={handleInput} id='email'  />
         </div>
 
-        <div>
-            <label htmlFor="password" className='label'>Password</label>
+        <div className='password'> 
+            <label htmlFor="password" className='label'>Password</label><br />
             <input type="password" name='password' 
              value={userRegistration.password} className='input'
              onChange={handleInput} id='password'  />
         </div>
 
-        <div>
-          <label htmlFor="profile" className='profile'>Profile</label>
-          <input type="file" name="profile" value={userRegistration.files} onChange={handleInput} />
+       
+
+        <div className='button'>
+          <button type='submit' className='registerB'>Register</button>
         </div>
 
-        <div>
-          <button type='submit'>Register</button>
-        </div>
-
-
+        <p className='account'>Already have an account ?  <Link className='log' to="/Login">Login</Link></p>
        </form>
-       <p>Already have an account ?  <Link to="/Login">Login</Link></p>
+      
 
     </div>
   )

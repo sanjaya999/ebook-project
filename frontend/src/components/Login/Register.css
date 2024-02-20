@@ -1,0 +1,61 @@
+@font-face {
+    font-family: sans;
+    src: url(../Open_Sans/OpenSans-Italic-VariableFont_wdth\,wght.ttf);
+  }
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+
+.wholeF{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.text{
+    color:  black;
+    text-align: center;
+    border-bottom: 1px solid  rgb(207, 38, 38);
+}
+
+
+label{
+    color:  rgb(207, 38, 38);
+}
+
+.fullName{
+    margin: 10px;
+    padding: 20px;
+}
+
+.email{
+    margin: 10px;
+    padding: 20px;
+}
+
+.password{
+    margin: 10px;
+    padding: 20px;
+}
+
+input{
+    border-style: none;
+    width: 100%;
+    outline: none;
+    border-bottom: 1px solid  rgb(207, 38, 38);
+}
+
+
+form p{
+    color: #666666;
+}
+
+.log{
+    text-decoration: none;
+    color: rgb(207, 38, 38) ;
+}
+
