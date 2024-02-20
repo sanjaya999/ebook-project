@@ -10,7 +10,7 @@ function Register() {
  
   const [userRegistration, setuserRegistration] = useState({
 
-    fullname : "",
+    fullName : "",
     
     email :"",
     password :"",
@@ -55,9 +55,9 @@ const handleSubmit= async(e)=>{
 
 
         <div className='fullName'>
-            <label htmlFor="fullname" className='label'>Full Name</label><br />
-            <input type="text" name='fullname'
-            value={userRegistration.fullname} className='input'
+            <label htmlFor="fullName" className='label'>Full Name</label><br />
+            <input type="text" name='fullName'
+            value={userRegistration.fullName} className='input'
             onChange={handleInput} id='fullname'  />
         </div>
 
