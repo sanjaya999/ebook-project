@@ -34,9 +34,12 @@ const userSchema = new Schema({
     refreshToken : {
         type : String,
     }
+   
 
 
-
+} ,
+{
+    timestamps: true
 })
 
 //encrypt password with bcrypt
