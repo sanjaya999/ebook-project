@@ -3,8 +3,33 @@ import {ApiError} from "../utils/apiError.js"
 import {User} from "../models/user.model.js"
 import {uploadOnCloudinary} from "../utils/cloudinary.js"
 import { ApiResponse } from "../utils/apiResponse.js";
-import { upload } from "../middlewares/multer.middleware.js";
+import multer from 'multer';
 import mongoose from "mongoose";
+
+
+
+const generateAccessAndRefreshTokens = async(userId)=>{
+    try{
+        const user = await User.findById(userId)
+        if (!user) {
+            throw new ApiError(404, "User not found");
+        }
+
+        const accesstToken = user.generateAccessToken()
+        const refreshToken = user.generateRefreshToken()
+        user.refreshToken = refreshToken
+        await user.save({validateBeforeSave : false})
+        return {accesstToken , refreshToken}
+    }
+    catch(error){
+        throw new ApiError(500, "sth went wrong while generating refreshtoken")
+
+    }
+
+
+}
+
+
 
 
 const registerUser = asyncHandler(async(req,res) => {
@@ -20,16 +45,14 @@ const registerUser = asyncHandler(async(req,res) => {
             throw ApiError(400 , "All fields are required")
         }
 
-         const existedUser =  await User.findOne({
-             email 
-        })
+         const existedUser =  await User.findOne({ email })
 
         if (existedUser){
             throw new ApiError(409 , "User already existed")
 
         }
 
-       //req.body gives access by express and req.files is by multer middleware
+      // req.body gives access by express and req.files is by multer middleware
     //    const profileLocalPath = req.file?.profile[0]?.path;
         
     //      if(!profileLocalPath){
@@ -69,6 +92,50 @@ const registerUser = asyncHandler(async(req,res) => {
 
     })
 
+
+
+
+    const loginUser = asyncHandler(async(req,res)=>{
+
+        const {email,password} = req.body
+        console.log(email , password)
+        if (!email && !password ){
+            throw new ApiError(400 , "email and password required")
+        }
+
+        const user = await User.findOne({email})
+        if (!user){
+            throw new ApiError(404 , "user doesnt exist")
+        }
+
+
+        const isPasswordValid = await user.isPasswordCorrect(password)
+        if(!isPasswordValid){
+            throw new ApiError(401, "Invalid user credentials")
+        }
+
+
+        const {accesstToken , refreshToken} = await generateAccessAndRefreshTokens(user._id)
+
+        const loggedInUser = await User.findById(user._id).
+        select("-password -refreshToken")
+        const option = {
+            httpOnly : true,
+            secure : true,
+        }
+
+         return res.status(200)
+         .cookie("accessToken",accesstToken,option)
+         .cookie("refreshToken" , refreshToken,option)
+         .json(
+            new ApiResponse(200,{
+                user : loggedInUser , accesstToken , refreshToken
+
+            },
+            "user logged in successful")
+         )
+    })
+
  
 
-export {registerUser} 
+export {registerUser , loginUser} 
