@@ -4,7 +4,7 @@ import {User} from "../models/user.model.js"
 import {uploadOnCloudinary} from "../utils/cloudinary.js"
 import { ApiResponse } from "../utils/apiResponse.js";
 import multer from 'multer';
-import mongoose from "mongoose";
+import mongoose, { trusted } from "mongoose";
 
 
 
@@ -119,6 +119,7 @@ const registerUser = asyncHandler(async(req,res) => {
 
         const loggedInUser = await User.findById(user._id).
         select("-password -refreshToken")
+        //cookies by default can be edited but with httponly it can only be modified by server
         const option = {
             httpOnly : true,
             secure : true,
@@ -136,6 +137,30 @@ const registerUser = asyncHandler(async(req,res) => {
          )
     })
 
+    const logoutUser = asyncHandler(async(req,res)=>{
+        await User.findByIdAndUpdate(
+            req.user.id,
+            {
+                $unset :{
+                    refreshToken : 1
+                }
+            },
+            {
+                new: true
+            }
+        )
+        const option = {
+            httpOnly : true,
+            secure : true
+        }
+
+        return res
+        .status(200)
+        .clearCookie("accessToken",option)
+        .clearCookie("refreshToken",option)
+        .json(new ApiResponse(200, {}, "User logged out"))
+    })
+
  
 
-export {registerUser , loginUser} 
+export {registerUser , loginUser,logoutUser} 
