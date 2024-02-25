@@ -1,3 +1,8 @@
+@font-face {
+    font-family: sans;
+    src: url(../Open_Sans/OpenSans-Italic-VariableFont_wdth\,wght.ttf);
+  }
+
 body{
     background-color: #ecebeb;
     margin: 0;
@@ -95,6 +100,10 @@ body{
 
 .searchbook{
     background-color: white;
+    width: 40%;
+    height: 3vh;
+    border-radius: 9px;
+
   
 }
 
@@ -102,6 +111,8 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 5px;
+    padding-left: 5px;
 }
 
 
@@ -114,5 +125,12 @@ body{
     font-size:min(1.5vh) ;
   }
   
-
+.SButton{
+    background-color:rgb(243, 94, 94) ;
+    color: white;
+    width: 9%;
+    height: 4vh;
+    margin-left: 5px;
+    border-radius: 9px;
+}
  
