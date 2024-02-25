@@ -77,17 +77,7 @@ ul.navlink {
   margin-left: 15px;
   }
 
-  .search{
-     border-color: rgba(240, 51, 51, 0.678);
-     height: 3vh ;
-     width: 250px;
-     border-radius: 10px;
-
-  }
-  .search::placeholder{
-    font-family: sans;
-    font-size:min(1.5vh) ;
-  }
+  
   
   .login{
     text-decoration: none;

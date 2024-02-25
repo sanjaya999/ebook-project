@@ -30,11 +30,7 @@ function Nav() {
                 Top Picks
               </NavLink>
             </li>
-            <li>
-              <input type="text" className="search" placeholder="Search"/>
-              <FaSearch className="sIcon"/>
-
-            </li>
+            
             <li className="start"> 
               <NavLink  to="/Login" className="login" > Login</NavLink>
             </li>

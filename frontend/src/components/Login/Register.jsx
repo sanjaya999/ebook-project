@@ -80,7 +80,7 @@ const handleSubmit= async(e)=>{
        
 
         <div className='button'>
-          <button type='submit' className='registerB'>Register</button>
+          <button type='submit' className='Llogin'>Register</button>
         </div>
 
         <p className='account'>Already have an account ?  <Link className='log' to="/Login">Login</Link></p>
