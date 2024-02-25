@@ -20,6 +20,14 @@ function Home() {
       <Link className="log" to="/Login">Login!</Link> to join us and show your writing!
     </p>
    </div>
+
+
+
+   <div className="search">
+    <input type="text" className='searchbook'  placeholder='Search For any books , articles , papers' />
+    <button className='SButton'>Search</button>
+
+   </div>
    </>
   )
 }

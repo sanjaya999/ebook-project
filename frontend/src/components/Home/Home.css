@@ -1,5 +1,9 @@
 body{
     background-color: #ecebeb;
+    margin: 0;
+    padding: 0;
+    
+    
 }
 .cards{
     width: 15%;
@@ -68,33 +72,47 @@ body{
    
   }
 
-
-
-
-
-
-
-
-
-
-
-  @media only screen and (max-width: 768px) {
+  @media screen and (max-width: 768px) {
     .cards {
-        width: 30%; 
+        width: 20%; /* Adjust width for smaller screens */
     }
 
     .homelog {
-        width: 60%;
+        width: 20%; /* Adjust width for smaller screens */
+
     }
 }
 
-@media only screen and (max-width: 480px) {
+@media screen and (max-width: 576px) {
     .cards {
-        width: 45%; 
+        width: 52%; /* Adjust width for even smaller screens */
     }
 
     .homelog {
-        width: 80%; 
+        width: 20%; /* Adjust width for even smaller screens */
     }
 }
+
+.searchbook{
+    background-color: white;
+  
+}
+
+.search{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+
+
+.search::placeholder{
+    font-family: sans;
+    font-size:min(1.5vh) ;
+  }
+  
+
  

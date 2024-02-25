@@ -42,7 +42,7 @@ label{
     padding: 20px;
 }
 
-input{
+.input{
     border-style: none;
     width: 100%;
     outline: none;
