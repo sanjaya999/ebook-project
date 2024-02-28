@@ -28,6 +28,13 @@ function Home() {
     <button className='SButton'>Search</button>
 
    </div>
+
+
+   <div className="section">
+    <div className='Top100'>Top 100</div>
+    <div className="request">Request Book</div>
+ 
+   </div>
    </>
   )
 }
