@@ -1,12 +1,17 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState , useContext} from 'react';
 import { Link } from 'react-router-dom';
 import "./Login.css"
 import axios from "axios"
+import UserContext from '../../Context/Context.js';
 
 
 function Login() {
- 
+    
+    const [userdata , setuserdata] = useState();
+
+    const {setUser} = useContext(UserContext)
+   
     const[userlogin , setuserlogin] = useState({
         email : "",
         password : ""
@@ -14,6 +19,7 @@ function Login() {
 
     const handleInput = (e)=>{
         const {name , value} = e.target;
+        
         setuserlogin({
             ...userlogin,
             [name]:value
@@ -23,12 +29,16 @@ function Login() {
     const handleSubmit = async(e)=>{
         e.preventDefault();
         try{
+             
+
             const response = await axios.post('http://localhost:5000/api/v1/user/login',userlogin);
+           setuserdata(response.data)
+           setUser(userdata)
             console.log("user Loggedin" , response.data);
 
         }
         catch(error){
-            console.log("registration failed" , error.response.data);
+            console.log("registration failed" , error);
         }
     }
 
@@ -71,4 +81,4 @@ function Login() {
   )
 }
 
-export default Login
+export default Login;
