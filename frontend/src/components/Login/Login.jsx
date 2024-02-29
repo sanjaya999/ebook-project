@@ -8,7 +8,7 @@ import UserContext from '../../Context/Context.js';
 
 function Login() {
     
-    const [userdata , setuserdata] = useState();
+    
 
     const {setUser} = useContext(UserContext)
    
@@ -22,19 +22,19 @@ function Login() {
         
         setuserlogin({
             ...userlogin,
-            [name]:value
+            [name] :value
         })
     }
 
     const handleSubmit = async(e)=>{
         e.preventDefault();
         try{
-             
+             setUser({email , password});
 
-            const response = await axios.post('http://localhost:5000/api/v1/user/login',userlogin);
-           setuserdata(response.data)
-           setUser(userdata)
-            console.log("user Loggedin" , response.data);
+            const response = await axios.post('http://localhost:5000/api/v1/user/login', userlogin);
+           
+           
+            console.log("uggedser Loin" , response.data);
 
         }
         catch(error){
