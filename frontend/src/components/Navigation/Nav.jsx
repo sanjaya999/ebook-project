@@ -12,9 +12,9 @@ import UserContext from "../../Context/Context.js";
 
 function Nav() {
 
-    const {user , login , logout} = useContext(UserContext);
+    const {user  , logout} = useContext(UserContext);
     const handleLogout = ()=>{
-      logout()
+      logout();
   
     }
   
@@ -41,9 +41,9 @@ function Nav() {
                 Top Picks
               </NavLink>
             </li>
-            {user ? (
+            {user ?(
               <li className="start">
-                <span>{user}</span>
+                <span className="logname">{user.fullName}</span>
                 <button onClick={handleLogout} className="login">
                   Logout
                 </button>
