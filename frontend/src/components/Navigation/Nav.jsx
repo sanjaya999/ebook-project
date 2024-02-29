@@ -1,14 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import "./Nav.css";
 import { IoMdHome } from "react-icons/io";
 import { MdExploreOff } from "react-icons/md";
 import { FaSearch } from "react-icons/fa";
+import UserContext from "../../Context/Context.js";
+
+
 
 
 
 function Nav() {
+
+    const {user , login , logout} = useContext(UserContext);
+    const handleLogout = ()=>{
+      logout()
+  
+    }
+  
   return (
+    
     <header>
       <nav>
         <div className="navigation">
@@ -30,14 +41,25 @@ function Nav() {
                 Top Picks
               </NavLink>
             </li>
-            
-            <li className="start"> 
-              <NavLink  to="/Login" className="login" > Login</NavLink>
-            </li>
+            {user ? (
+              <li className="start">
+                <span>{user}</span>
+                <button onClick={handleLogout} className="login">
+                  Logout
+                </button>
+              </li>
+            ) : (
+              <li className="start">
+                <NavLink to="/Login" className="login">
+                  Login
+                </NavLink>
+              </li>
+            )}
           </ul>
         </div>
       </nav>
     </header>
+    
   );
 }
 
