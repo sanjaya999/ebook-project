@@ -9,10 +9,10 @@ const UserContextProvider = ({children})=>{
     const [accessToken, setAccessToken] = useState(null);
   const [refreshToken, setRefreshToken] = useState(null);
 
-    const login = async (credentials) => {
+    const login = async (user) => {
         try {
           console.log(credentials);
-          const response = await axios.post('http://localhost:5000/api/v1/user/login', credentials);
+          const response = await axios.post('http://localhost:5000/api/v1/user/login', user);
           const data = await response.json();
           const res = response.data.data
 
@@ -22,7 +22,7 @@ const UserContextProvider = ({children})=>{
             console.log(accessToken );
             console.log(refreshToken );
           }
-          
+
 
           document.cookie = `accessToken=${accessToken}; Path=/; Secure; HttpOnly`;
           document.cookie = `refreshToken=${refreshToken}; Path=/; Secure; HttpOnly`;
