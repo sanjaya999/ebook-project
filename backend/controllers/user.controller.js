@@ -15,11 +15,11 @@ const generateAccessAndRefreshTokens = async(userId)=>{
             throw new ApiError(404, "User not found");
         }
 
-        const accesstToken = user.generateAccessToken()
+        const accessToken = user.generateAccessToken()
         const refreshToken = user.generateRefreshToken()
         user.refreshToken = refreshToken
         await user.save({validateBeforeSave : false})
-        return {accesstToken , refreshToken}
+        return {accessToken , refreshToken}
     }
     catch(error){
         throw new ApiError(500, "sth went wrong while generating refreshtoken")
@@ -115,7 +115,7 @@ const registerUser = asyncHandler(async(req,res) => {
         }
 
 
-        const {accesstToken , refreshToken} = await generateAccessAndRefreshTokens(user._id)
+        const {accessToken , refreshToken} = await generateAccessAndRefreshTokens(user._id)
 
         const loggedInUser = await User.findById(user._id).
         select("-password -refreshToken")
@@ -126,11 +126,11 @@ const registerUser = asyncHandler(async(req,res) => {
         }
 
          return res.status(200)
-         .cookie("accessToken",accesstToken,option)
+         .cookie("accessToken",accessToken,option)
          .cookie("refreshToken" , refreshToken,option)
          .json(
             new ApiResponse(200,{
-                user : loggedInUser , accesstToken , refreshToken
+                user : loggedInUser , accessToken , refreshToken
 
             },
             "user logged in successful")
