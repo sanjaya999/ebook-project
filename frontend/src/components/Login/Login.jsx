@@ -26,13 +26,13 @@ function Login() {
         })
     }
 
-    
+
     const handleSubmit = async(e)=>{
         e.preventDefault();
         try{
-             setUser({email , password});
+             setUser(userlogin);
              console.log(e);
-             console.log(email);
+             console.log(userlogin);
 
             const response = await axios.post('http://localhost:5000/api/v1/user/login', userlogin);
             const accessToken = response.data.data.accesstToken
