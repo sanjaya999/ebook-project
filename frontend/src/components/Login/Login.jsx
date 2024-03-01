@@ -6,10 +6,10 @@ import axios from "axios"
 import UserContext from '../../Context/Context.js';
 
 
-function Login() {
-    
-    
 
+
+function Login() {
+ 
     const {setUser} = useContext(UserContext)
    
     const[userlogin , setuserlogin] = useState({
@@ -26,15 +26,22 @@ function Login() {
         })
     }
 
+    
     const handleSubmit = async(e)=>{
         e.preventDefault();
         try{
              setUser({email , password});
+             console.log(e);
+             console.log(email);
 
             const response = await axios.post('http://localhost:5000/api/v1/user/login', userlogin);
+            const accessToken = response.data.data.accesstToken
+            localStorage.setItem("accessToken", accessToken);
+            
+            
            
            
-            console.log("uggedser Loin" , response.data);
+            // console.log("uggedser Loin" , response.data);
 
         }
         catch(error){
