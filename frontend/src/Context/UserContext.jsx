@@ -72,7 +72,7 @@ const logout = async (accessToken) => {
 
 
     return (
-        <UserContext.Provider value={{ user ,login,logout, setUser}}>
+        <UserContext.Provider value={{user ,login,logout, setUser}}>
 
             {children}
         </UserContext.Provider>

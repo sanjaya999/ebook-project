@@ -35,17 +35,15 @@ function Login() {
              console.log(userlogin);
 
             const response = await axios.post('http://localhost:5000/api/v1/user/login', userlogin);
-            const accessToken = response.data.data.accesstToken
+            const accessToken = response.data.data.accessToken
+            console.log(accessToken)
             localStorage.setItem("accessToken", accessToken);
             
-            
-           
-           
             // console.log("uggedser Loin" , response.data);
 
         }
         catch(error){
-            console.log("registration failed" , error);
+            console.log("login failed in login.jsx" , error);
         }
     }
 
