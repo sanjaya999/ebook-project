@@ -12,7 +12,7 @@ import UserContext from "../../Context/Context.js";
 
 function Nav() {
 
-    const {user  , logout} = useContext(UserContext);
+    const {user ,logout } = useContext(UserContext);
     const handleLogout = ()=>{
       logout();
   
@@ -43,7 +43,7 @@ function Nav() {
             </li>
             {user ?(
               <li className="start">
-                <span className="logname">{user.fullName}</span>
+                <span className="logname">{user}</span>
                 <button onClick={handleLogout} className="login">
                   Logout
                 </button>
