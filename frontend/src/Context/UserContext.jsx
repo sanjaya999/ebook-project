@@ -6,6 +6,7 @@ import axios from 'axios';
 
 const UserContextProvider = ({children})=>{
     const [user, setUser] = useState();
+    const [userDetail , setUserDetail] = useState();
     const [accessToken, setAccessToken] = useState(null);
   const [refreshToken, setRefreshToken] = useState(null);
 
@@ -16,6 +17,8 @@ const UserContextProvider = ({children})=>{
     const login = async (credentials) => {
         try {
           console.log(credentials);
+          setUserDetail(credentials)
+         
           const response = await axios.post('http://localhost:5000/api/v1/user/login', credentials);
           const data = await response.data
           
@@ -25,19 +28,20 @@ const UserContextProvider = ({children})=>{
             setUser(data.data.user.fullName);
             setAccessToken(data.data.accessToken)
             setRefreshToken(data.data.refreshToken)
+          
             
-           
-           
           }
+
+          
           else{
             console.log("response 200 failed in usercontext");
           }
-          
-
-
+         
           document.cookie = `accessToken=${accessToken}; Path=/; Secure; HttpOnly`;
           document.cookie = `refreshToken=${refreshToken}; Path=/; Secure; HttpOnly`;
 
+
+          
 
     //       const accessTokenCookie = response.headers['set-cookie']
     //   .find(cookie => cookie.startsWith('accessToken='));
@@ -49,16 +53,18 @@ const UserContextProvider = ({children})=>{
         } catch (error) {
           console.log("login error", error);
         }
+
       };
       
-   const token = localStorage.getItem("accessToken")
-   console.log(token);
+  console.log("this is credentials outside scope" , userDetail)
+  
    
   
-const logout = async () => {
+const logout = async (token) => {
     try {
-        
-        const response = await axios.post('http://localhost:5000/api/v1/user/logout',null,{
+        console.log(token)
+        console.log(userDetail)
+        const response = await axios.post('http://localhost:5000/api/v1/user/logout',userDetail,{
           
           headers: {
            
@@ -84,9 +90,11 @@ const logout = async () => {
     }
   };
 
+  
+
 
     return (
-        <UserContext.Provider value={{user ,login,logout, setUser , setusername}}>
+        <UserContext.Provider value={{user ,login,logout, setUser , setusername , accessToken}}>
 
             {children}
         </UserContext.Provider>
