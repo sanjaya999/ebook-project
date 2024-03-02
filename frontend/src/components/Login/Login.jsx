@@ -4,11 +4,13 @@ import { Link } from 'react-router-dom';
 import "./Login.css"
 import axios from "axios"
 import UserContext from '../../Context/Context.js';
+import { useCookies } from 'react-cookie'
 
 
 
 
 function Login() {
+    const [cookies, setCookie] = useCookies(['access_token', 'refresh_token'])
  
     const {login} = useContext(UserContext)
    
@@ -40,13 +42,18 @@ function Login() {
 
             
             const accessToken = response.data.data.accessToken
-            console.log(accessToken)
+            const refreshToken = response.data.data.refreshToken
+            let expires = new Date()
+            expires.setTime(expires.getTime() + (1 * 60 * 60 * 1000))
+           
             console.log("user LoggedIn" , response.data);
 
             if(response) { 
                 window.localStorage.setItem("token" , accessToken)
                 window.localStorage.setItem("loggedIn" , true)
-                window.location.href = "./user"
+                // window.location.href = "./user"
+                setCookie('access_token', accessToken, { path: '/',  expires})
+                setCookie('refresh_token', refreshToken, {path: '/', expires})
             }
 
         }
