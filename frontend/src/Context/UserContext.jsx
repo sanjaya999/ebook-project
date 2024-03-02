@@ -9,19 +9,30 @@ const UserContextProvider = ({children})=>{
     const [accessToken, setAccessToken] = useState(null);
   const [refreshToken, setRefreshToken] = useState(null);
 
-    const login = async (user) => {
+  const setusername = async()=>{
+    setUser(data.data.user.fullName);
+  }
+
+    const login = async (credentials) => {
         try {
           console.log(credentials);
-          const response = await axios.post('http://localhost:5000/api/v1/user/login', user);
-          const data = await response.json();
-          const res = response.data.data
+          const response = await axios.post('http://localhost:5000/api/v1/user/login', credentials);
+          const data = await response.data
+          
+          
 
-          if(response ===200){
-            setUser(data.user);
-           console.log(res);
-            console.log(accessToken );
-            console.log(refreshToken );
+          if(data){
+            setUser(data.data.user.fullName);
+            setAccessToken(data.data.accessToken)
+            setRefreshToken(data.data.refreshToken)
+            
+           
+           
           }
+          else{
+            console.log("response 200 failed in usercontext");
+          }
+          
 
 
           document.cookie = `accessToken=${accessToken}; Path=/; Secure; HttpOnly`;
@@ -39,16 +50,19 @@ const UserContextProvider = ({children})=>{
           console.log("login error", error);
         }
       };
-    
+      
+   const token = localStorage.getItem("accessToken")
+   console.log(token);
+   
   
-const logout = async (accessToken) => {
+const logout = async () => {
     try {
         
-        const response = await axios.post('http://localhost:5000/api/v1/user/logout', {
+        const response = await axios.post('http://localhost:5000/api/v1/user/logout',null,{
           
           headers: {
            
-            Authorization: `Bearer ${accessToken}`, // Include the access token
+            Authorization: `Bearer ${token}`, // Include the access token
           },
         });
     
@@ -72,7 +86,7 @@ const logout = async (accessToken) => {
 
 
     return (
-        <UserContext.Provider value={{user ,login,logout, setUser}}>
+        <UserContext.Provider value={{user ,login,logout, setUser , setusername}}>
 
             {children}
         </UserContext.Provider>
@@ -80,4 +94,4 @@ const logout = async (accessToken) => {
 
 }
 
-export default UserContextProvider
+export default UserContextProvider ;
