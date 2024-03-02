@@ -37,11 +37,17 @@ function Login() {
              const res = await login(userlogin)
 
             const response = await axios.post('http://localhost:5000/api/v1/user/login', userlogin);
+
+            
             const accessToken = response.data.data.accessToken
             console.log(accessToken)
-            
-            
             console.log("user LoggedIn" , response.data);
+
+            if(response) { 
+                window.localStorage.setItem("token" , accessToken)
+                window.localStorage.setItem("loggedIn" , true)
+                window.location.href = "./user"
+            }
 
         }
         catch(error){
