@@ -37,9 +37,7 @@ const UserContextProvider = ({children})=>{
             console.log("response 200 failed in usercontext");
           }
          
-          document.cookie = `accessToken=${accessToken}; Path=/; Secure; HttpOnly`;
-          document.cookie = `refreshToken=${refreshToken}; Path=/; Secure; HttpOnly`;
-
+         
 
           
 
