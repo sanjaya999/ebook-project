@@ -12,9 +12,9 @@ import UserContext from "../../Context/Context.js";
 
 function Nav() {
 
-    const {user ,logout } = useContext(UserContext);
+    const {user ,logout ,accessToken} = useContext(UserContext);
     const handleLogout = ()=>{
-      logout();
+      logout(accessToken);
   
     }
   
