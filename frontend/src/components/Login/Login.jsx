@@ -10,7 +10,7 @@ import UserContext from '../../Context/Context.js';
 
 function Login() {
  
-    const {setUser} = useContext(UserContext)
+    const {login} = useContext(UserContext)
    
     const[userlogin , setuserlogin] = useState({
         email : "",
@@ -30,16 +30,18 @@ function Login() {
     const handleSubmit = async(e)=>{
         e.preventDefault();
         try{
-             setUser(userlogin);
-             console.log(e);
+             
+             
              console.log(userlogin);
+
+             const res = await login(userlogin)
 
             const response = await axios.post('http://localhost:5000/api/v1/user/login', userlogin);
             const accessToken = response.data.data.accessToken
             console.log(accessToken)
-            localStorage.setItem("accessToken", accessToken);
             
-            // console.log("uggedser Loin" , response.data);
+            
+            console.log("user LoggedIn" , response.data);
 
         }
         catch(error){
