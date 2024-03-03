@@ -14,7 +14,7 @@ router.route("/register").post(upload.fields([
 registerUser)
 router.route("/login").post(loginUser)
 router.route("/logout").post( verifyJWT , logoutUser)
-router.route("/userId").post(userDetail)
+router.route("/userId").get(verifyJWT , userDetail)
 
 
 
