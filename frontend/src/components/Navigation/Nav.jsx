@@ -14,7 +14,7 @@ function Nav() {
 
     const {user ,logout ,accessToken} = useContext(UserContext);
     const handleLogout = ()=>{
-      logout(accessToken);
+      logout();
   
     }
   
