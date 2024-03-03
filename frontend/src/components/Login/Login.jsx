@@ -43,6 +43,8 @@ function Login() {
             
             const accessToken = response.data.data.accessToken
             const refreshToken = response.data.data.refreshToken
+            const name = response.data.data.user.fullName
+            console.log("this is username:",name);
             let expires = new Date()
             expires.setTime(expires.getTime() + (1 * 60 * 60 * 1000))
            
@@ -51,6 +53,7 @@ function Login() {
             if(response) { 
                 window.localStorage.setItem("token" , accessToken)
                 window.localStorage.setItem("loggedIn" , true)
+                window.localStorage.setItem("username",name)
                 // window.location.href = "./user"
                 setCookie('access_token', accessToken, { path: '/',  expires})
                 setCookie('refresh_token', refreshToken, {path: '/', expires})
