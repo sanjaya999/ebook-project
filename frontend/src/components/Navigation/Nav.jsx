@@ -13,6 +13,8 @@ import UserContext from "../../Context/Context.js";
 function Nav() {
 
     const {user ,logout ,accessToken} = useContext(UserContext);
+    
+    const name = window.localStorage.getItem("username")
     const handleLogout = ()=>{
       logout();
   
@@ -41,9 +43,9 @@ function Nav() {
                 Top Picks
               </NavLink>
             </li>
-            {user ?(
+            {name ?(
               <li className="start">
-                <span className="logname">{user}</span>
+                <span className="logname">{name}</span>
                 <button onClick={handleLogout} className="login">
                   Logout
                 </button>
