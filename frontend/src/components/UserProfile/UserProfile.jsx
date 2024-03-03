@@ -1,20 +1,24 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import "./UserProfile.css"
-import UserContext from '../../Context/Context';
+import axios from "axios"
+
 
 function UserProfile() {
-    const {user} = useContext(UserContext);
+    
+  const token = window.localStorage.getItem("token")
+
+  const response  = axios.get("http://localhost:5000/api/v1/userDetail" , {
+    header : {
+      Authorization : `Bearer ${token}`
+    }
+  })
+  console.log(response.data)
 
   return (
     <div>
         <h2>My Profile</h2>
 
-    <div className="userhead">
-        <div className="showname">
-            {user}
-        </div>
-
-    </div>
+   {token}
 
 
     </div>
