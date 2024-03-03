@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import UserContext from './Context.js'
 import axios from 'axios';
+import { useCookies } from 'react-cookie'
 
 
 
 const UserContextProvider = ({children})=>{
+  const [cookies, setCookie,removeCookie] = useCookies(['access_token', 'refresh_token'])
     const [user, setUser] = useState();
     const [userDetail , setUserDetail] = useState();
     const [accessToken, setAccessToken] = useState(null);
@@ -58,30 +60,18 @@ const UserContextProvider = ({children})=>{
   
    
   
-const logout = async (token) => {
+const logout = async () => {
     try {
-        console.log(token)
-        console.log(userDetail)
-        const response = await axios.post('http://localhost:5000/api/v1/user/logout',userDetail,{
-          
-          headers: {
-           
-            Authorization: `Bearer ${token}`, // Include the access token
-          },
-        });
-    
+      
+      
+        removeCookie('access_token');
+        removeCookie('refresh_token');
+        localStorage.removeItem('username');
+      
+        window.location.href = "/Login"
+      
+         
        
-        if (response.status === 200) {
-            setAccessToken(null);
-            setRefreshToken(null);
-        
-          document.cookie = 'accessToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT;';
-          document.cookie = 'refreshToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT;';
-          setUser(null);
-          
-        } else {
-          console.log("error occured during logout usercontext")
-        }
     } catch (error) {
       console.error('Logout failed:', error.message);
      
