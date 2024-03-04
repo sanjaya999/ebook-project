@@ -43,10 +43,7 @@ const UserContextProvider = ({children})=>{
 
           
 
-    //       const accessTokenCookie = response.headers['set-cookie']
-    //   .find(cookie => cookie.startsWith('accessToken='));
 
-    //   document.cookie = accessTokenCookie;
 
     return data;
 
@@ -56,7 +53,6 @@ const UserContextProvider = ({children})=>{
 
       };
       
-  console.log("this is credentials outside scope" , userDetail)
   
    
   
@@ -64,9 +60,11 @@ const logout = async () => {
     try {
       
       
-        removeCookie('access_token');
-        removeCookie('refresh_token');
+        removeCookie('accessToken');
+        removeCookie('refreshToken');
         localStorage.removeItem('username');
+        localStorage.removeItem('token');
+        localStorage.removeItem('loggedIn');
       
         window.location.href = "/Login"
       
