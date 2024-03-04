@@ -166,7 +166,7 @@ const registerUser = asyncHandler(async(req,res) => {
         const { _id } = req.body;
         console.log(_id);
         const detailAboutUser = await User.findById(_id)
-        .select("-password -refreshToken")
+        .select("-password -refreshToken");
         
 
         if(!detailAboutUser){
