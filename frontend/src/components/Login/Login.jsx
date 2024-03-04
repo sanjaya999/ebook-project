@@ -45,6 +45,7 @@ function Login() {
             console.log(accessToken)
             const refreshToken = response.data.data.refreshToken
             const name = response.data.data.user.fullName
+            const userid = response.data.data.user._id
             console.log("this is username:",name);
             let expires = new Date()
             expires.setTime(expires.getTime() + (1 * 60 * 60 * 1000))
@@ -55,6 +56,7 @@ function Login() {
                 window.localStorage.setItem("token" , accessToken)
                 window.localStorage.setItem("loggedIn" , true)
                 window.localStorage.setItem("username",name)
+                window.localStorage.setItem("userID", userid)
                 
                 setCookie('accessToken', accessToken, { path: '/',  expires})
                 setCookie('refreshToken', refreshToken, {path: '/', expires})
