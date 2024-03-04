@@ -10,7 +10,7 @@ import { useCookies } from 'react-cookie'
 
 
 function Login() {
-    const [cookies, setCookie] = useCookies(['access_token', 'refresh_token'])
+    const [cookies, setCookie] = useCookies(['accessToken', 'refreshToken'])
  
     const {login} = useContext(UserContext)
    
@@ -34,14 +34,15 @@ function Login() {
         try{
              
              
-             console.log(userlogin);
+            //  console.log(userlogin);
 
-             const res = await login(userlogin)
+            //  const res = await login(userlogin)
 
             const response = await axios.post('http://localhost:5000/api/v1/user/login', userlogin);
 
             
             const accessToken = response.data.data.accessToken
+            console.log(accessToken)
             const refreshToken = response.data.data.refreshToken
             const name = response.data.data.user.fullName
             console.log("this is username:",name);
@@ -50,13 +51,15 @@ function Login() {
            
             console.log("user LoggedIn" , response.data);
 
-            if(response) { 
+            if(response.status) { 
                 window.localStorage.setItem("token" , accessToken)
                 window.localStorage.setItem("loggedIn" , true)
                 window.localStorage.setItem("username",name)
-                // window.location.href = "./user"
-                setCookie('access_token', accessToken, { path: '/',  expires})
-                setCookie('refresh_token', refreshToken, {path: '/', expires})
+                
+                setCookie('accessToken', accessToken, { path: '/',  expires})
+                setCookie('refreshToken', refreshToken, {path: '/', expires})
+                
+
             }
 
         }
@@ -65,7 +68,7 @@ function Login() {
         }
     }
 
-
+ 
 
   return (
     <div className='middle'>
