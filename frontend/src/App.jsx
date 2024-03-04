@@ -13,13 +13,13 @@ import UserProfile from './components/UserProfile/UserProfile.jsx';
 import { useCookies } from 'react-cookie';
 
 const App = () =>{
-  const [cookies] = useCookies(['access_token', 'refresh_token']);
+  const [cookies] = useCookies(['accessToken', 'refreshToken']);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 
   useEffect(() => {
-    const loggedIn = cookies.access_token && cookies.refresh_token;
-    console.log("app.jsx loggedIn:", isLoggedIn);
+    const loggedIn = cookies.accessToken && cookies.refreshToken;
+    
     setIsLoggedIn(loggedIn);
     
   }, [cookies]);
