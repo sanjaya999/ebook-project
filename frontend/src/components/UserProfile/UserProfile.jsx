@@ -9,16 +9,18 @@ function UserProfile() {
   const token = window.localStorage.getItem("token")
   const _id = window.localStorage.getItem("userID")
   
+
+  // problem in fetching data
   const fetchData = async()=>{
     try{ 
-      const headers = {
-        'Authorization': `Bearer ${token}`
+      const data = _id;
+      const config = {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
     };
-      const response  =  await axios.get("http://localhost:5000/api/v1/user/userId" ,{
-        headers: headers,
-        data : {_id : _id}
       
-      }
+      const response  =  await axios.get("http://localhost:5000/api/v1/user/userId",config,data
     )
           console.log(response.data)
       }
