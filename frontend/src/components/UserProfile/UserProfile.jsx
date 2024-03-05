@@ -23,7 +23,7 @@ function UserProfile() {
       
       const response  =  await axios.get("http://localhost:5000/api/v1/user/userId",config,data
     )
-          console.log(response.data)
+          console.log("this is from userprofile :" , response.data)
       }
       catch(error){ 
         console.log(error)
