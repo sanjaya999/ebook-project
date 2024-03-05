@@ -58,8 +58,8 @@ function Login() {
                 window.localStorage.setItem("username",name)
                 window.localStorage.setItem("userID", userid)
                 
-                setCookie('accessToken', accessToken, { path: '/',  expires})
-                setCookie('refreshToken', refreshToken, {path: '/', expires})
+                setCookie('accessToken', accessToken, { path: '/',  expires, sameSite: 'None' ,secure: true })
+                setCookie('refreshToken', refreshToken, {path: '/', expires, sameSite: 'None', secure: true })
                 
 
             }
