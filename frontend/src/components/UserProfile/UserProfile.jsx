@@ -13,11 +13,12 @@ function UserProfile() {
   // problem in fetching data
   const fetchData = async()=>{
     try{ 
-      const data = _id;
+      const data = { _id: _id }; 
       const config = {
         headers: {
             'Authorization': `Bearer ${token}`
-        }
+        },
+        params: { _id: _id }
     };
       
       const response  =  await axios.get("http://localhost:5000/api/v1/user/userId",config,data

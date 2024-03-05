@@ -163,7 +163,7 @@ const registerUser = asyncHandler(async(req,res) => {
     
 
     const userDetail = asyncHandler(async(req , res)=>{
-        const { _id } = req.body;
+        const { _id } = req.query; 
         console.log(_id);
         const detailAboutUser = await User.findById(_id)
         .select("-password -refreshToken");
