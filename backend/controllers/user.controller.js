@@ -122,7 +122,7 @@ const registerUser = asyncHandler(async(req,res) => {
         //cookies by default can be edited but with httponly it can only be modified by server
         const option = {
             httpOnly : true,
-            secure : true,
+            // secure : true,
         }
 
          return res.status(200)
@@ -151,7 +151,7 @@ const registerUser = asyncHandler(async(req,res) => {
         )
         const option = {
             httpOnly : true,
-            secure : true
+            // secure : true
         }
 
         return res
