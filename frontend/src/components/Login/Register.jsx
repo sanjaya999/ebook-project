@@ -14,19 +14,19 @@ function Register() {
     
     email :"",
     password :"",
-    profile : null
+    profile : null,
   }
   
   );
 
 
 const handleInput = (e)=>{
-    const {name , value ,files} = e.target;
+    const {name , value ,file} = e.target;
 
-    const inputValue = name == "profile"?[0]:value;
+    const inputValue = name === "profile"?file[0]:value;
     setuserRegistration({
       ...userRegistration,
-       [name] : value
+       [name] : inputValue,
 })
 }
 
@@ -77,6 +77,13 @@ const handleSubmit= async(e)=>{
              onChange={handleInput} id='password'  />
         </div>
 
+        <div className='profile'> 
+            <label htmlFor="profile" className='label'>Profile</label><br />
+            <input type="file" name='profile' 
+            value={userRegistration.profile} 
+             className='input'
+             onChange={handleInput} id='profile'  />
+        </div>
        
 
         <div className='button'>
