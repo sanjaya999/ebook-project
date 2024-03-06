@@ -14,19 +14,19 @@ function Register() {
     
     email :"",
     password :"",
-    profile : null,
+    profile : null
   }
   
   );
 
 
 const handleInput = (e)=>{
-    const {name , value ,file} = e.target;
+    const {name , value ,files} = e.target;
 
-    const inputValue = name === "profile"?file[0]:value;
+    const inputValue = name === "profile"? files[0]:value;
     setuserRegistration({
       ...userRegistration,
-       [name] : inputValue,
+       [name] : inputValue
 })
 }
 
@@ -39,7 +39,20 @@ const handleSubmit= async(e)=>{
 
   //send data
   try {
-    const response = await axios.post('http://localhost:5000/api/v1/user/register',userRegistration);
+
+    const formData = new FormData();
+    formData.append('fullName', userRegistration.fullName);
+    formData.append('email', userRegistration.email);
+    formData.append('password', userRegistration.password);
+    formData.append('profile', userRegistration.profile);
+
+
+    const response = await axios.post('http://localhost:5000/api/v1/user/register',formData,{
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+
+    })
     console.log("registration successfull",response.data)
   } catch (error) {
     console.log("registration failed",error.response.data)
@@ -77,12 +90,9 @@ const handleSubmit= async(e)=>{
              onChange={handleInput} id='password'  />
         </div>
 
-        <div className='profile'> 
-            <label htmlFor="profile" className='label'>Profile</label><br />
-            <input type="file" name='profile' 
-            value={userRegistration.profile} 
-             className='input'
-             onChange={handleInput} id='profile'  />
+          <div className='profile'>
+         <label htmlFor="profile" className='label'>Profile Picture</label><br />
+        <input type="file" name='profile' onChange={handleInput} id='profile' />
         </div>
        
 
