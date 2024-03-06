@@ -52,26 +52,26 @@ const registerUser = asyncHandler(async(req,res) => {
 
         }
 
-      // req.body gives access by express and req.files is by multer middleware
-    //    const profileLocalPath = req.file?.profile[0]?.path;
+    //   req.body gives access by express and req.files is by multer middleware
+       const profileLocalPath = req.files?.profile[0]?.path;
         
-    //      if(!profileLocalPath){
-    //         throw new ApiError(400 , "profile file is required");
+         if(!profileLocalPath){
+            throw new ApiError(400 , "profile file is required");
 
-    //      }
+         }
 
-    //       const profile = await uploadOnCloudinary(profileLocalPath)
+          const profile = await uploadOnCloudinary(profileLocalPath)
 
-    //     if(!profile){
-    //         throw new ApiError(400 , "profile is requried")
-    //      }
+        if(!profile){
+            throw new ApiError(400 , "profile is requried")
+         }
 
         const user =   await User.create({
             fullName ,
             
             email,
             password,
-            // profile : profile.url,
+            profile : profile.url || "",
             
 
         })
