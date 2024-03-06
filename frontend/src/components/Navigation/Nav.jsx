@@ -45,7 +45,7 @@ function Nav() {
             </li>
             {name ?(
               <li className="start">
-                <span className="logname">{name}</span>
+                <NavLink to="/user" className="logname">{name}</NavLink>
                 <button onClick={handleLogout} className="login">
                   Logout
                 </button>
