@@ -11,6 +11,8 @@ import Login from './components/Login/Login';
 import Register from './components/Login/Register.jsx';
 import UserProfile from './components/UserProfile/UserProfile.jsx';
 import { useCookies } from 'react-cookie';
+import Upload from './components/Upload/Upload.jsx';
+
 
 const App = () =>{
   const [cookies] = useCookies(['accessToken', 'refreshToken']);
@@ -36,6 +38,8 @@ const App = () =>{
           isLoggedIn? <UserProfile/> : <Login/>} />
         <Route path='Register' element={<Register />} />
         <Route path='user' element={<UserProfile/>}/>
+        <Route path='upload' element={<Upload/>}/>
+
       </Route> 
     </Routes>
   </Router>
