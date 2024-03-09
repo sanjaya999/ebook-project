@@ -1,11 +1,64 @@
-.userImage{
-    width: 190px;
-    height: 200px;
-    border-radius: 30%;
-    object-fit: cover;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-}
-
-.userDetail{
+.userDetail {
     display: flex;
-}
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+  
+  .userImageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background-color: #f5f5f5;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+  }
+  
+  .userImage {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .otherDetail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f5f5;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .fullName,
+  .email {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .fullName {
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  
+  .createdAt,
+  .userId {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: #333;
+    background-color: #e6f2ff;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+  }
+  
+  .createdAt span,
+  .userId span {
+    font-weight: bold;
+  }
