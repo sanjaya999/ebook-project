@@ -42,8 +42,12 @@ function UserProfile() {
         <h2>My Profile</h2>
 
         <div className="userDetail">
+        <div className="userImageContainer">
+
            <img className="userImage" src={userData.profile} alt="Profile" />
-           
+           </div>
+
+
            <div className="otherDetail">
 
             <div className="fullName">Name : {userData.fullName}</div>
