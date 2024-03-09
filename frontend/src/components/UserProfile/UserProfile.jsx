@@ -2,6 +2,8 @@ import { useState , useEffect } from "react"
 import React from 'react'
 import "./UserProfile.css"
 import axios from "axios"
+import {NavLink} from "react-router-dom"
+
 
 
 
@@ -56,6 +58,10 @@ function UserProfile() {
             <div className="userId"> User ID : {userData.userId}</div>
            </div>
 
+        </div>
+
+        <div className="upload">
+          <NavLink to="/upload">Upload your own ?</NavLink>
         </div>
 
 
