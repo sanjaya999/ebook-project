@@ -5,6 +5,7 @@ import {uploadOnCloudinary} from "../utils/cloudinary.js"
 import { ApiResponse } from "../utils/apiResponse.js";
 import multer from 'multer';
 import mongoose, { trusted } from "mongoose";
+import { Book } from "../models/book.model.js";
 
 
 
@@ -180,6 +181,46 @@ const registerUser = asyncHandler(async(req,res) => {
 
 
     })
+
+    const handleFile = asyncHandler(async(req,res)=>{
+        const {bookName , description } = req.body
+
+        console.log(bookName , description)
+
+        if(!bookName && !description){
+            throw new ApiError(400 , "bookname and description needed")
+
+        }
+
+        const bookImageLocalPath = req.files?.bookImage[0]?.path;
+        if(!bookImageLocalPath){
+            throw new ApiError(400 , "book image is required")
+        }
+         const bookFileLocalPath = req.files?.bookFile[0]?.path;
+         if(!bookFileLocalPath){
+            throw new ApiError(400 , "bookfile is compulsory")
+         }
+
+            const  bookImage = await uploadOnCloudinary(bookImageLocalPath)
+            const bookFile = await uploadOnCloudinary(bookFileLocalPath)
+
+            const uploadedBy = req.user._id;
+
+         const book = await Book.create({
+            bookName,
+            description,
+            bookImage : bookImage.url || "",
+            bookFile : bookFile.url || "",
+            uploadedBy: uploadedBy
+         });
+
+        return res.status(201)
+        .json(new ApiResponse(200 , book , "book registered"))
+
+
+
+
+    })
  
 
-export {registerUser , loginUser,logoutUser , userDetail} 
+export {registerUser , loginUser,logoutUser , userDetail, handleFile} 
