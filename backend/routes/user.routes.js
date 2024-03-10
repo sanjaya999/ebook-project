@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { upload } from "../middlewares/multer.middleware.js";
-import { registerUser,loginUser,logoutUser,userDetail } from "../controllers/user.controller.js";
+import { registerUser,loginUser,logoutUser,userDetail ,handleFile} from "../controllers/user.controller.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 
 const router = Router();
@@ -15,6 +15,17 @@ registerUser)
 router.route("/login").post(loginUser)
 router.route("/logout").post( verifyJWT , logoutUser)
 router.route("/userId").get(verifyJWT , userDetail)
+router.route("/upload").post(verifyJWT, upload.fields([
+    {
+        name:"bookImage",
+        maxCount : 1
+    },
+    {
+        name : "bookFile",
+        maxCount : 1
+    }
+])
+,handleFile)
 
 
 
