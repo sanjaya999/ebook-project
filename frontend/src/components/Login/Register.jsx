@@ -19,6 +19,8 @@ function Register() {
   
   );
 
+  const [registrationSuccess, setRegistrationSuccess] = useState(false);
+
 
 const handleInput = (e)=>{
     const {name , value ,files} = e.target;
@@ -54,17 +56,29 @@ const handleSubmit= async(e)=>{
 
     })
     console.log("registration successfull",response.data)
+    setRegistrationSuccess(true); 
+    clearForm();
   } catch (error) {
     console.log("registration failed",error.response.data)
     
   }
 
 }
+const clearForm = () => {
+  setuserRegistration({
+    fullName: "",
+    email: "",
+    password: "",
+    profile: null
+  });
+}
+
   return (
     <div className='wholeF'>
       <img src="book.png" alt="" />
        <form action="" onSubmit={handleSubmit} >
        <h1 className='text'>Register</h1>
+       {registrationSuccess && <p className="success-message">Registration successful!</p>}
 
 
         <div className='fullName'>
