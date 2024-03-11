@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { upload } from "../middlewares/multer.middleware.js";
-import { registerUser,loginUser,logoutUser,userDetail ,handleFile} from "../controllers/user.controller.js";
+import { registerUser,loginUser,logoutUser,userDetail ,handleFile, fetchBook} from "../controllers/user.controller.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 
 const router = Router();
@@ -26,6 +26,8 @@ router.route("/upload").post(verifyJWT, upload.fields([
     }
 ])
 ,handleFile)
+
+router.route("/explore").get(fetchBook)
 
 
 
