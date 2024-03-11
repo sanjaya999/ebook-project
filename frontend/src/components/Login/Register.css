@@ -59,3 +59,10 @@ form p{
     color: rgb(207, 38, 38) ;
 }
 
+.success-message {
+    color: green;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
