@@ -37,8 +37,9 @@ const App = () =>{
         <Route path='Login' element={
           isLoggedIn? <UserProfile/> : <Login/>} />
         <Route path='Register' element={<Register />} />
-        <Route path='user' element={<UserProfile/>}/>
-        <Route path='upload' element={<Upload/>}/>
+        <Route path='user' element={
+          isLoggedIn? <UserProfile/> : <Login/>}/>
+        <Route path='upload' element={  isLoggedIn? <Upload/>:<Login/>}/>
 
       </Route> 
     </Routes>
