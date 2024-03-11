@@ -221,6 +221,13 @@ const registerUser = asyncHandler(async(req,res) => {
 
 
     })
+
+    const fetchBook = asyncHandler(async(req , res)=>{
+        const books = await Book.find({});
+        return res.status(201)
+        .json(new ApiResponse (200 , books , "book fetched"))
+    })
  
 
-export {registerUser , loginUser,logoutUser , userDetail, handleFile} 
+export {registerUser , loginUser,logoutUser , userDetail,
+     handleFile , fetchBook} 
