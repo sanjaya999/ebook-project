@@ -1,147 +1,132 @@
-@font-face {
-    font-family: sans;
-    src: url(../Open_Sans/OpenSans-Italic-VariableFont_wdth\,wght.ttf);
-  }
+/* Home.css */
 
-body{
-    background-color: #ecebeb;
-    margin: 0;
-    padding: 0;
-    
-    
-}
-.cards{
-    width: 15%;
-    margin: 10px;
-    overflow: hidden;
-    background-color: rgb(204, 201, 189);
-    border-radius: 30px;
-    box-shadow: 2px 2px 10px black ;
-     margin-left: 20px;
- }
-
-.logo{
-    display: flex;
-    justify-content: center;
-    margin-top: 5vh;
-}
-
-
- .image{
-    height: 25vh;
- }
-
- .aboutus{
-    color: rgb(243, 94, 94);
-    font-family: Italic;
-    font-size: large;
-}
-
-
-
-.log{
-    text-decoration: none;
-    
-}
-
-.homelog{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 5vh;
-    border-radius:  10px;
-    padding: 5px;
-    margin-left: 650px;
-
-    background-color: rgba(255, 90, 90, 0.89);
-   
-    width: 30%;
-    
-    
-}
-
-.sign{
-  
-    padding: 10px;
-    
-    margin-bottom: 20px;
-    
-
-
-}
-
-.box p {
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f8f8;
+    color: #333;
     text-align: center;
-    margin: 0;
-    
-   
-  }
-
-  @media screen and (max-width: 768px) {
-    .cards {
-        width: 20%; /* Adjust width for smaller screens */
-    }
-
-    .homelog {
-        width: 20%; /* Adjust width for smaller screens */
-
-    }
-}
-
-@media screen and (max-width: 576px) {
-    .cards {
-        width: 52%; /* Adjust width for even smaller screens */
-    }
-
-    .homelog {
-        width: 20%; /* Adjust width for even smaller screens */
-    }
-}
-
-.searchbook{
-    background-color: white;
-    width: 40%;
-    height: 3vh;
-    border-radius: 9px;
-
-  
-}
-
-.search{
+    min-height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 5px;
-    padding-left: 5px;
-}
-
-
-
-
-
-
-.search::placeholder{
-    font-family: sans;
-    font-size:min(1.5vh) ;
+    flex-direction: column;
   }
   
-.SButton{
-    background-color:rgb(243, 94, 94) ;
-    color: white;
-    width: 9%;
-    height: 4vh;
-    margin-left: 5px;
-    border-radius: 9px;
-}
-
-.section{
+  /* Logo */
+  .logo {
+    margin-top: 80px;
+  }
+  
+  .image {
+    width: 200px;
+    height: auto;
+  }
+  
+  /* About Us Section */
+  .we {
+    margin-top: 60px;
+  }
+  
+  .aboutus {
+    font-size: 28px;
+    font-weight: 500;
+    color: #ff6347;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Login Section */
+  .homelog {
+    margin-top: 40px;
+  }
+  
+  .sign {
+    font-size: 20px;
+  }
+  
+  .log {
+    color: #ff6347;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+  }
+  
+  .log:hover {
+    color: #e65c4f;
+  }
+  
+  /* Search Section */
+  .search {
+    margin-top: 60px;
+  }
+  
+  .searchbook {
+    padding: 12px 24px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 18px;
+    width: 500px;
+    max-width: 80%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .SButton {
+    background-color: #ff6347;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-size: 18px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .SButton:hover {
+    background-color: #e65c4f;
+  }
+  
+  /* Section Links */
+  .section {
     display: flex;
     justify-content: center;
-    margin-top: 30px;
-}
-
-.request{
-    margin-left: 50px;
-    margin-bottom: 20px;
-}
- 
+    margin-top: 80px;
+    margin-bottom: 60px;
+  }
+  
+  .Top100,
+  .request {
+    background-color: #ff6347;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-size: 18px;
+    margin: 0 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+  }
+  
+  .Top100:hover,
+  .request:hover {
+    background-color: #e65c4f;
+  }
+  
+  /* Content Spacing */
+  .content {
+    flex: 1 0 auto;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .searchbook {
+      width: 400px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .searchbook {
+      width: 300px;
+    }
+  }
