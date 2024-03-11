@@ -1,97 +1,77 @@
-@font-face {
-  font-family: sans;
-  src: url(../Open_Sans/OpenSans-Italic-VariableFont_wdth\,wght.ttf);
-}
+/* Nav.css */
 
-body{
-  margin: 0;
-  font-family: sans;
-}
+/* General Styles */
 header {
-  background-color: #333;
-  height: auto;
- 
-}
-
-nav {
-  display: flex;
-  justify-content: center;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .navigation {
-  width: 100%;
   max-width: 1200px;
+  margin: 0 auto;
   padding: 10px;
-  display: flex;
-  justify-content: space-evenly;
 }
 
-ul.navlink {
-  list-style: none;
+.navlink {
+  list-style-type: none;
   display: flex;
-  margin: 0;
-  padding: 0;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .navlink li {
-  margin-right: 90px;
+  margin: 0 10px;
 }
 
-
-.no-nav-text {
+/* Link Styles */
+.no-nav-text,
+.yes-nav-text {
   text-decoration: none;
-  color: white;
+  color: #333;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
 }
-
 
 .yes-nav-text {
-  text-decoration: underline;
-  color: rgba(240, 51, 51, 0.678);
-  text-decoration: none;
+  background-color: #ff6347;
+  color: #fff;
 }
 
-@media (max-width: 768px) {
-  .navigation {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  ul.navlink {
-    margin-top: 10px;
-  }
-
-  .navlink li {
-    margin: 0;
-    margin-bottom: 10px;
-  }
+.no-nav-text:hover {
+  background-color: #ff634733;
 }
 
-.icons{
-  width: 20px;
-  height: 20px;
-
+/* Icon Styles */
+.icons {
+  margin-right: 8px;
+  color: #ff6347;
 }
 
-.sIcon{
-  color: white;
-  margin-left: 15px;
-  }
-
-  
-  
-  .login{
-    text-decoration: none;
-    font-family: sans;
-    color: white;
-    border: 1px solid rgba(240, 51, 51, 0.678) ;
-    padding: 8px;
-    border-radius: 10px;
-    margin-top: 20px;
-  }
-
-.logname{
-  color: white;
+/* Login/Logout Button Styles */
+.login {
+  background-color: #ff6347;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
-span{
-  color: white;
+
+.login:hover {
+  background-color: #e65c4f;
+}
+
+.logname {
+  color: #ff6347;
+  margin-right: 10px;
+}
+
+.start {
+  display: flex;
+  align-items: center;
 }
