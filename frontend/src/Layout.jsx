@@ -6,12 +6,11 @@ import Footer from './components/Footer/Footer';
 
 function Layout() {
   return (
-    <>
-    <Nav />
-    <Outlet />
-    <Footer />
-    </>
-    
+    <div className="page-container">
+      <Nav />
+      <Outlet />
+      <Footer />
+    </div>
   )
 }
 
