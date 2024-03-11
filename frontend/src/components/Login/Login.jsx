@@ -18,6 +18,8 @@ function Login() {
         email : "",
         password : ""
     });
+    const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
 
     const handleInput = (e)=>{
         const {name , value} = e.target;
@@ -31,6 +33,20 @@ function Login() {
 
     const handleSubmit = async(e)=>{
         e.preventDefault();
+        setEmailError(false);
+        setPasswordError(false);
+    
+        // Validate the input fields
+        if (userlogin.email === '') {
+          setEmailError(true);
+          return;
+        }
+    
+        if (userlogin.password === '') {
+          setPasswordError(true);
+          return;
+        }
+
         try{
              
              
@@ -80,15 +96,17 @@ function Login() {
         <h2 >Login</h2>
             <div className='field' > 
                 <label htmlFor="email" className='label'>Email</label> <br />
-                <input type="email" className='input' name='email'
+                <input type="email" className={`input ${emailError ? 'error' : ''}`} name='email'
                 value={userlogin.email}
                 onChange={handleInput} id='email'/>
+                   {emailError && <span className="error-message">Please enter your email</span>}
             </div>
 
             <div className='field'>
                 <label htmlFor="password" className='label'>Password</label> <br />
-                <input type="Password" className='input' name='password'
+                <input type="Password" className={`input ${passwordError ? 'error' : ''}`} name='password'
                 onChange={handleInput} value={userlogin.password} id='password'/>
+                  {passwordError && <span className="error-message">Please enter your password</span>}
             </div>
 
             <div>
