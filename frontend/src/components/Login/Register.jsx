@@ -49,7 +49,7 @@ const handleSubmit= async(e)=>{
     formData.append('profile', userRegistration.profile);
 
 
-    const response = await axios.post('http://localhost:5000/api/v1/user/register',formData,{
+    const response = await axios.post('https://ebook-project-taupe.vercel.app/api/v1/user/register',formData,{
       headers: {
         'Content-Type': 'multipart/form-data'
       }
