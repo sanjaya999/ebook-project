@@ -9,7 +9,7 @@ function Explore() {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await axios.get('https://ebook-project-taupe.vercel.app/api/v1/user/explore');
+        const response = await axios.get('http://localhost:5000/api/v1/user/explore');
           setBooks(response.data.data);
           console.log(books);
           
