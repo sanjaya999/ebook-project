@@ -25,7 +25,11 @@ const pdfSchema = new mongoose.Schema(
 
   uploadedBy: { 
     type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true 
-    }
+    },
+    
+    accessCount: {
+       type: Number, default: 0
+       },
 }
 , { timestamps: true });
 
