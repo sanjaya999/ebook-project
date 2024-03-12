@@ -106,6 +106,7 @@ body {
     transition: background-color 0.3s ease;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
   }
   
   .Top100:hover,
@@ -130,3 +131,66 @@ body {
       width: 300px;
     }
   }
+
+/* Book List Styles */
+.book-list {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.book-item {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  max-width: 800px;
+  transition: transform 0.3s ease;
+}
+
+.book-item:hover {
+  transform: translateY(-5px);
+}
+
+.book-image-container {
+  flex: 0 0 200px;
+  margin-right: 20px;
+}
+
+.book-image {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.book-details {
+  flex: 1;
+  text-align: left;
+}
+
+.book-title {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.book-download {
+  display: inline-block;
+  background-color: #ff6347;
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.book-download:hover {
+  background-color: #e65c4f;
+}
