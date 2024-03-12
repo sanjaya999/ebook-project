@@ -7,7 +7,7 @@ const TopPicks = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/v1/user/topPicks');
+        const response = await axios.get('https://ebook-project-taupe.vercel.app/api/v1/user/topPicks');
         console.log(response.data.data)
         setBooks(response.data.data);
 

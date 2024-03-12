@@ -48,7 +48,7 @@ function Upload() {
         formData.append('bookFile', Book.bookFile);
     
     
-        const response = await axios.post('http://localhost:5000/api/v1/user/upload',formData,{
+        const response = await axios.post('https://ebook-project-taupe.vercel.app/api/v1/user/upload',formData,{
           headers: {
             'Content-Type': 'multipart/form-data',
             'Authorization': `Bearer ${token}`

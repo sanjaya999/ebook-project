@@ -25,7 +25,7 @@ function UserProfile() {
           params: { _id }
         };
 
-        const response = await axios.get("http://localhost:5000/api/v1/user/userId", config, data);
+        const response = await axios.get("https://ebook-project-taupe.vercel.app/api/v1/user/userId", config, data);
         console.log("this is from userprofile :", response.data);
         const { fullName, email, createdAt, profile, _id: userId } = response.data.data.user;
         
