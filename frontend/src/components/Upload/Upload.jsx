@@ -56,6 +56,9 @@ function Upload() {
     
         })
         console.log("book upload successfull",response.data)
+        if(response){
+          alert("uploaded successfully")
+        }
       } catch (error) {
         console.log(" book upload failed",error)
         
