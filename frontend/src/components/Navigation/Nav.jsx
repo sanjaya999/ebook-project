@@ -16,7 +16,25 @@ function Nav() {
     
     const name = window.localStorage.getItem("username")
     const handleLogout = ()=>{
-      logout();
+       
+       
+  try {
+    
+    
+      removeCookie('accessToken');
+      removeCookie('refreshToken');
+      localStorage.removeItem('username');
+      localStorage.removeItem('token');
+      localStorage.removeItem('loggedIn');
+    
+      window.location.href = "/Login"
+    
+       
+     
+  } catch (error) {
+    console.error('Logout failed:', error.message);
+   
+  }
   
     }
   
