@@ -5,12 +5,16 @@ import { IoMdHome } from "react-icons/io";
 import { MdExploreOff } from "react-icons/md";
 import { FaSearch } from "react-icons/fa";
 import UserContext from "../../Context/Context.js";
+import { useCookies } from 'react-cookie'
+
 
 
 
 
 
 function Nav() {
+  const [cookies, setCookie,removeCookie] = useCookies(['access_token', 'refresh_token'])
+
 
     const {user ,logout ,accessToken} = useContext(UserContext);
     
