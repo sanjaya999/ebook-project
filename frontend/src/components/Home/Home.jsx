@@ -1,9 +1,28 @@
-import React from 'react'
+import React ,{useState} from 'react'
 import { Link } from 'react-router-dom'
 import "./Home.css"
 import book from "../book.png"
+import axios from 'axios';
 
 function Home() {
+
+  const [searchTerm, setSearchTerm] = useState('');
+  const [books, setBooks] = useState([]);
+
+  const handleSearch = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5000/api/v1/user/search?searchTerm=${searchTerm}`);
+      setBooks(response.data.data);
+      console.log(response.data.data)
+    } catch (err) {
+      console.error(err);
+    }
+
+  }
+
+
+
+
   return (
    <>
    <div className="logo"><img className="image"  src={book} alt="" srcset="" /></div>
@@ -24,14 +43,38 @@ function Home() {
 
 
    <div className="search">
-    <input type="text" className='searchbook'  placeholder='Search For any books , articles , papers' />
-    <button className='SButton'>Search</button>
+    <input type="text" className='searchbook'  
+     value={searchTerm}
+     onChange={(e) => setSearchTerm(e.target.value)}
+    placeholder='Search For any books , articles , papers' />
+    <button  onClick={handleSearch} className='SButton'>Search</button>
+
+    {Array.isArray(books) && books.length > 0 ? (
+  <ul className="book-list">
+    {books.map((book) => (
+      <li key={book._id} className="book-item">
+        <div className="book-image-container">
+          <img className="book-image" src={book.bookImage} alt={book.bookName} />
+        </div>
+        <div className="book-details">
+          <h3 className="book-title">{book.bookName}</h3>
+          <a className="book-download" href={book.bookFile} download>
+            Download Book
+          </a>
+        </div>
+      </li>
+    ))}
+  </ul>
+) : (
+  <p>No books found</p>
+)}
+
 
    </div>
 
 
    <div className="section">
-    <div className='Top100'>Top 100</div>
+    <Link to="/top" className='Top100'>Top 100</Link>
     <div className="request">Request Book</div>
  
    </div>
