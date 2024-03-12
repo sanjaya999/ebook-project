@@ -224,10 +224,42 @@ const registerUser = asyncHandler(async(req,res) => {
 
     const fetchBook = asyncHandler(async(req , res)=>{
         const books = await Book.find({});
+        for (const book of books) {
+            book.accessCount += 1;
+            await book.save();
+          }
         return res.status(201)
         .json(new ApiResponse (200 , books , "book fetched"))
+    })
+
+    const search = asyncHandler(async(req,res)=>{
+        const searchTerm = req.query.searchTerm
+
+        let books;
+
+        if (searchTerm && searchTerm.trim() !== ''){
+            books = await Book.find({bookName :{$regex : searchTerm , $options : "i"}});
+            for (const book of books) {
+                book.accessCount += 1;
+                await book.save();
+              }
+        }
+        else{
+            books = [];
+        }
+  
+    
+
+        return res.status(201)
+        .json(new ApiResponse(200 , books, "book found successfully"))
+    })
+
+    const topPicks = asyncHandler(async(req, res)=>{
+        const books = await Book.find({}).sort({accessCount : -1});
+        return res.status(200)
+        .json(new ApiResponse(200 , books , "these are top books"));
     })
  
 
 export {registerUser , loginUser,logoutUser , userDetail,
-     handleFile , fetchBook} 
+     handleFile , fetchBook , search , topPicks} 
