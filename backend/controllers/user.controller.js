@@ -259,7 +259,49 @@ const registerUser = asyncHandler(async(req,res) => {
         return res.status(200)
         .json(new ApiResponse(200 , books , "these are top books"));
     })
+
+    const adminOnly = asyncHandler(async(req,res)=>{
+        const {email , password} = req.body
+
+        if (!email && email !== "admin@san" && !password){
+            throw new ApiError(400 , "Only admin has an access")
+
+        }
+        const user = await User.findOne({email})
+        if (!user){
+            throw new ApiError(404 , "user doesnt exist")
+        }
+
+        const isPasswordValid = await user.isPasswordCorrect(password)
+        if(!isPasswordValid){
+            throw new ApiError(401, "Invalid user credentials")
+        }
+
+
+        const {accessToken , refreshToken} = await generateAccessAndRefreshTokens(user._id)
+
+        const loggedInUser = await User.findById(user._id).
+        select("-password -refreshToken")
+        const option = {
+            httpOnly : true,
+            // secure : true,
+        }
+
+         return res.status(200)
+         .cookie("accessToken",accessToken,option)
+         .cookie("refreshToken" , refreshToken,option)
+         .json(
+            new ApiResponse(200,{
+                user : loggedInUser , accessToken , refreshToken
+
+            },
+            "user logged in successful")
+         )
+
+
+        
+    })
  
 
 export {registerUser , loginUser,logoutUser , userDetail,
-     handleFile , fetchBook , search , topPicks} 
+     handleFile , fetchBook , search , topPicks, adminOnly} 
