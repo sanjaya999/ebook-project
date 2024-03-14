@@ -260,48 +260,80 @@ const registerUser = asyncHandler(async(req,res) => {
         .json(new ApiResponse(200 , books , "these are top books"));
     })
 
-    const adminOnly = asyncHandler(async(req,res)=>{
-        const {email , password} = req.body
-
-        if (!email && email !== "admin@san" && !password){
-            throw new ApiError(400 , "Only admin has an access")
-
-        }
-        const user = await User.findOne({email})
-        if (!user){
-            throw new ApiError(404 , "user doesnt exist")
-        }
-
-        const isPasswordValid = await user.isPasswordCorrect(password)
-        if(!isPasswordValid){
-            throw new ApiError(401, "Invalid user credentials")
-        }
-
-
-        const {accessToken , refreshToken} = await generateAccessAndRefreshTokens(user._id)
-
-        const loggedInUser = await User.findById(user._id).
-        select("-password -refreshToken")
-        const option = {
-            httpOnly : true,
-            // secure : true,
-        }
-
-         return res.status(200)
-         .cookie("accessToken",accessToken,option)
-         .cookie("refreshToken" , refreshToken,option)
-         .json(
-            new ApiResponse(200,{
-                user : loggedInUser , accessToken , refreshToken
-
-            },
-            "user logged in successful")
-         )
-
+    const adminFetchBooks= asyncHandler(async(req,res)=>{
+        const books = await Book.find({});
+       
+        return res.status(201)
+        .json(new ApiResponse (200 , books , "book fetched"))
 
         
     })
+
+    const adminFetchUsers = asyncHandler(async(req,res)=>{
+        const allUsers = await User.find({})
+
+        return res.status(201)
+        .json(new ApiResponse (200 , allUsers , "all users fetched"))
+
+    })
+
+    const deleteUser = asyncHandler(async(req , res)=>{
+        try{
+            const user = await User.findByIdAndDelete(req.query.userId);
+            if(!user){
+                return res.status(404)
+                .json(new ApiResponse(404 , "user not found"))
+            }
+            res.json(new ApiResponse(200 , " User deleted  successfully"))
+        }
+        catch(error){
+            res.status(500)
+            .json(new ApiError(500 , "server error at deleteUser"))
+        }
+    })
+
+    const deleteBook = asyncHandler(async(req , res)=>{
+        try{
+            const book = await Book.findByIdAndDelete(req.query.bookId);
+            if(!book){
+                return res.status(404)
+                .json(new ApiResponse(404 , "book not found"))
+            }
+            res.json(new ApiResponse(200 , " book deleted  successfully"))
+        }
+        catch(error){
+            res.status(500)
+            .json(new ApiError(500 , "server error at deleteBook"))
+        }
+    })
+
+    const userApprove = asyncHandler(async(req , res)=>{
+        const {userId} = req.query;
+        const {isApproved} = req.body;
+
+        try{
+            const user = await User.findById(userId);
+
+            if(!user){
+                return new ApiError(404 , "no user found")
+            }
+
+            user.isApproved = isApproved;
+            await user.save();
+
+            return res.status(200)
+            .json(new ApiResponse(200 , "user Approved"))
+        }
+        catch(error){
+            return res.status(500)
+            .json(new ApiError(500 , "error at userApprove"))
+        }
+    })
+
+
+
  
 
 export {registerUser , loginUser,logoutUser , userDetail,
-     handleFile , fetchBook , search , topPicks, adminOnly} 
+     handleFile , fetchBook , search , topPicks, adminFetchBooks ,
+     adminFetchUsers , deleteBook ,deleteUser ,userApprove} 

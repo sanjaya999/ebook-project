@@ -31,6 +31,14 @@ const userSchema = new Schema({
         type : String,
     },
 
+    isAdmin: {
+        type: Boolean,
+        default: false 
+    },
+    
+    isApproved: { type: Boolean, 
+        default: false },
+
     refreshToken : {
         type : String,
     }
