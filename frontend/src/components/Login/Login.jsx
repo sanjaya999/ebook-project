@@ -5,11 +5,13 @@ import "./Login.css"
 import axios from "axios"
 import UserContext from '../../Context/Context.js';
 import { useCookies } from 'react-cookie'
-
+import { useNavigate } from 'react-router-dom';
 
 
 
 function Login() {
+    const navigate = useNavigate();
+
     const [cookies, setCookie] = useCookies(['accessToken', 'refreshToken'])
  
     const {login} = useContext(UserContext)
@@ -61,6 +63,8 @@ function Login() {
             console.log(accessToken)
             const refreshToken = response.data.data.refreshToken
             const name = response.data.data.user.fullName
+            const admin =  response.data.data.user.isAdmin
+            const isApproved = response.data.data.user.isApproved
             const userid = response.data.data.user._id
             console.log("this is username:",name);
             let expires = new Date()
@@ -79,6 +83,14 @@ function Login() {
                 
 
             }
+            if(response.data.data.user.isApproved){
+                setCookie('isApproved', isApproved, {path: '/', expires, sameSite: 'None', secure: true })
+                }
+            if(response.data.data.user.isAdmin){
+                setCookie('isAdmin', admin, {path: '/', expires, sameSite: 'None', secure: true })
+                navigate("/admin")
+            }
+            
 
         }
         catch(error){

@@ -27,6 +27,8 @@ function Nav() {
     
       removeCookie('accessToken');
       removeCookie('refreshToken');
+      removeCookie("isAdmin");
+      removeCookie("isApproved");
       localStorage.removeItem('username');
       localStorage.removeItem('token');
       localStorage.removeItem('loggedIn');
