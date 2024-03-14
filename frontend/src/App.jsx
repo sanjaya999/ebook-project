@@ -12,17 +12,23 @@ import Register from './components/Login/Register.jsx';
 import UserProfile from './components/UserProfile/UserProfile.jsx';
 import { useCookies } from 'react-cookie';
 import Upload from './components/Upload/Upload.jsx';
+import Admin from './components/UserProfile/Admin.jsx';
 
 
 const App = () =>{
-  const [cookies] = useCookies(['accessToken', 'refreshToken']);
+  const [cookies] = useCookies(['accessToken', 'refreshToken', "isAdmin"]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAdmin , setisAdmin] = useState(false)
 
 
   useEffect(() => {
-    const loggedIn = cookies.accessToken && cookies.refreshToken;
-    
+    const loggedIn = cookies.accessToken && cookies.refreshToken && cookies.isApproved == true;
+    const isAdmin = cookies.isAdmin
+
+    setisAdmin(isAdmin)
     setIsLoggedIn(loggedIn);
+
+    
     
   }, [cookies]);
  return (
@@ -40,6 +46,8 @@ const App = () =>{
         <Route path='user' element={
           isLoggedIn? <UserProfile/> : <Login/>}/>
         <Route path='upload' element={  isLoggedIn? <Upload/>:<Login/>}/>
+        <Route path='admin' element={  isAdmin? <Admin/>:<UserProfile/>}/>
+
 
       </Route> 
     </Routes>
