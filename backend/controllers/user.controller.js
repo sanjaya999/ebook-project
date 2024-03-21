@@ -183,9 +183,9 @@ const registerUser = asyncHandler(async(req,res) => {
     })
 
     const handleFile = asyncHandler(async(req,res)=>{
-        const {bookName , description } = req.body
+        const {bookName , description , genre} = req.body
 
-        console.log(bookName , description)
+        console.log(bookName , description ,genre)
 
         if(!bookName && !description){
             throw new ApiError(400 , "bookname and description needed")
@@ -211,7 +211,8 @@ const registerUser = asyncHandler(async(req,res) => {
             description,
             bookImage : bookImage.url || "",
             bookFile : bookFile.url || "",
-            uploadedBy: uploadedBy
+            uploadedBy: uploadedBy,
+            genre : genre
          });
 
         return res.status(201)
