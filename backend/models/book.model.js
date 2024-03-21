@@ -29,7 +29,13 @@ const pdfSchema = new mongoose.Schema(
     
     accessCount: {
        type: Number, default: 0
-       },
+       }
+       ,
+    genre: {
+      type: String,
+      required: true ,
+      default: 'Unknown'
+    }
 }
 , { timestamps: true });
 
