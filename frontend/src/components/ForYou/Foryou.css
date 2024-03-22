@@ -1,0 +1,112 @@
+/* Container Styles */
+.foryou-book-list-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .foryou-genre-containers {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .foryou-genre-container {
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+  }
+  
+  .foryou-genre-container:first-child .foryou-book-list {
+    flex-direction: row;
+  }
+  
+  /* Typography */
+  .foryou-genre-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+  
+  .foryou-book-title {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 0.5rem;
+  }
+  
+  .foryou-book-description {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+  }
+  
+  .foryou-book-uploaded-by,
+  .foryou-book-created-at {
+    font-size: 0.8rem;
+    color: #999;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Book List */
+  .foryou-book-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  
+  .foryou-book-item {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    transition: transform 0.3s ease;
+    flex: 0 0 calc(33.33% - 1rem); /* Adjust the width as needed */
+  }
+  
+  .foryou-genre-container:first-child .foryou-book-item {
+    flex: 0 0 auto;
+  }
+  
+  .foryou-book-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Book Image */
+  .foryou-book-image-container {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+  
+  .foryou-book-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* Download Button */
+  .foryou-book-download-btn {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .foryou-book-download-btn:hover {
+    background-color: #0056b3;
+  }
+
+  .foryou-genre-containers {
+    display: flex;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent wrapping of genre containers */
+  }
