@@ -13,6 +13,7 @@ import UserProfile from './components/UserProfile/UserProfile.jsx';
 import { useCookies } from 'react-cookie';
 import Upload from './components/Upload/Upload.jsx';
 import Admin from './components/UserProfile/Admin.jsx';
+import Foryou from './components/ForYou/Foryou.jsx';
 
 
 const App = () =>{
@@ -37,6 +38,7 @@ const App = () =>{
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home/>} />
+        <Route path="foryou" element={<Foryou />} />
         <Route path="Home" element={<Home />} />
         <Route path="Explore" element={<Explore />} />
         <Route path="Top" element={<Top />} />
