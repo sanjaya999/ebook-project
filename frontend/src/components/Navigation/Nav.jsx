@@ -56,6 +56,15 @@ function Nav() {
                 Home
               </NavLink>
             </li>
+
+            <li>
+              <NavLink to="/foryou" className ={ ({isActive})=> `${isActive? "yes-nav-text" : "no-nav-text"}`}>
+              
+                For You
+              </NavLink>
+            </li>
+
+
             <li>
               <NavLink to="/Explore" className ={ ({isActive})=> `${isActive? "yes-nav-text" : "no-nav-text"}`}>
               <MdExploreOff className="icons" />
