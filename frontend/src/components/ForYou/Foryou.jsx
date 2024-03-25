@@ -58,8 +58,8 @@ function Foryou() {
                 </div>
               ))}
           </div>
-          <button onClick={() => slide(genre, -1)}>Previous</button>
-          <button onClick={() => slide(genre, 1)}>Next</button>
+          <button  className="Llogin" onClick={() => slide(genre, -1)}>Previous</button>
+          <button className="Llogin" onClick={() => slide(genre, 1)}>Next</button>
         </div>
       ))}
     </div>
