@@ -77,17 +77,8 @@ function Login() {
            
             console.log("user LoggedIn" , response.data);
 
-            if(response.status) { 
-                window.localStorage.setItem("token" , accessToken)
-                window.localStorage.setItem("loggedIn" , true)
-                window.localStorage.setItem("username",name)
-                window.localStorage.setItem("userID", userid)
-                
-                setCookie('accessToken', accessToken, { path: '/',  expires, sameSite: 'None' ,secure: true })
-                setCookie('refreshToken', refreshToken, {path: '/', expires, sameSite: 'None', secure: true })
-                
+          
 
-            }
             if(response.data.data.user.isApproved){
                 setCookie('isApproved', isApproved, {path: '/', expires, sameSite: 'None', secure: true })
                 }
@@ -96,6 +87,25 @@ function Login() {
                 navigate("/admin")
             }
             
+            if(response.data.data.user.isApproved == false){
+                alert(" Please wait till admin approves this user")
+      
+    
+                window.location.href = "/Login"
+                
+            }else{
+                if(response.status) { 
+                    window.localStorage.setItem("token" , accessToken)
+                    window.localStorage.setItem("loggedIn" , true)
+                    window.localStorage.setItem("username",name)
+                    window.localStorage.setItem("userID", userid)
+                    
+                    setCookie('accessToken', accessToken, { path: '/',  expires, sameSite: 'None' ,secure: true })
+                    setCookie('refreshToken', refreshToken, {path: '/', expires, sameSite: 'None', secure: true })
+                    
+    
+                }
+            }
 
         }
         catch(error){
