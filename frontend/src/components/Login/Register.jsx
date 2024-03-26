@@ -3,11 +3,12 @@ import axios from 'axios'
 import { Link } from 'react-router-dom';
 import "./Register.css"
 import "../book.png";
+import LoadingSpinner from '../Loading/LoadingSpinner';
 
 
 
 function Register() {  
- 
+  const [isLoading, setIsLoading] = useState(false);
   const [userRegistration, setuserRegistration] = useState({
 
     fullName : "",
@@ -20,7 +21,7 @@ function Register() {
   );
 
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
-
+  const [registrationError, setRegistrationError] = useState('');
 
 const handleInput = (e)=>{
     const {name , value ,files} = e.target;
@@ -37,6 +38,7 @@ const handleInput = (e)=>{
 
 const handleSubmit= async(e)=>{
   e.preventDefault();
+  setIsLoading(true);
   console.log(userRegistration); // if we are getting or not
 
   //send data
@@ -60,7 +62,10 @@ const handleSubmit= async(e)=>{
     clearForm();
   } catch (error) {
     console.log("registration failed",error.response.data)
+    setRegistrationError(error.response.data.message || 'Registration failed. Please try again.');
     
+  }finally {
+    setIsLoading(false);
   }
 
 }
@@ -73,12 +78,25 @@ const clearForm = () => {
   });
 }
 
+useEffect(() => {
+  if (!registrationSuccess) {
+    setRegistrationSuccess(false);
+  }
+}, [registrationSuccess]);
+
+
   return (
     <div className='wholeF'>
-      <img src="book.png" alt="" />
+
+{isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <>
+     
        <form action="" onSubmit={handleSubmit} >
        <h1 className='text'>Register</h1>
        {registrationSuccess && <p className="success-message">Registration successful!</p>}
+       {registrationError && <p className="error-message">{registrationError}</p>}
 
 
         <div className='fullName'>
@@ -116,7 +134,8 @@ const clearForm = () => {
 
         <p className='account'>Already have an account ?  <Link className='log' to="/Login">Login</Link></p>
        </form>
-      
+      </>
+      )}
 
     </div>
   )
