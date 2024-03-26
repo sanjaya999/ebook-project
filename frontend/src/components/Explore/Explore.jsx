@@ -1,17 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "./Explore.css"
+import LoadingSpinner from '../Loading/LoadingSpinner';
+
 
 
 function Explore() {
   const [books, setBooks] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
 
   useEffect(() => {
     const fetchBooks = async () => {
+      setIsLoading(true);
+
       try {
         const response = await axios.get('http://localhost:5000/api/v1/user/explore');
           setBooks(response.data.data);
           console.log(books);
+          setIsLoading(false);
+
           
        
       } catch (err) {
@@ -25,6 +33,11 @@ function Explore() {
   
   return (
     <div className="app-explore-book-list-container">
+
+
+{isLoading ? (
+        <LoadingSpinner />
+      ) : ( <>
     <h1 className="app-explore-book-list-title">Book List</h1>
     <ul className="app-explore-book-list">
       {books &&
@@ -54,6 +67,7 @@ function Explore() {
           </li>
         ))}
     </ul>
+    </>)}
   </div>
   )
 };

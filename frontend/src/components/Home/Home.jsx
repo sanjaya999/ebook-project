@@ -3,17 +3,25 @@ import { Link } from 'react-router-dom'
 import "./Home.css"
 import book from "../book.png"
 import axios from 'axios';
+import LoadingSpinner from '../Loading/LoadingSpinner';
+
 
 function Home() {
 
   const [searchTerm, setSearchTerm] = useState('');
   const [books, setBooks] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const handleSearch = async () => {
+    setIsLoading(true);
+
     try {
       const response = await axios.get(`http://localhost:5000/api/v1/user/search?searchTerm=${searchTerm}`);
       setBooks(response.data.data);
       console.log(response.data.data)
+      setIsLoading(false);
+
     } catch (err) {
       console.error(err);
     }
@@ -49,6 +57,11 @@ function Home() {
     placeholder='Search For any books , articles , papers' />
     <button  onClick={handleSearch} className='SButton'>Search</button>
 
+
+
+    {isLoading ? (
+        <LoadingSpinner />
+      ) : ( <>
     {Array.isArray(books) && books.length > 0 ? (
   <ul className="book-list">
     {books.map((book) => (
@@ -67,7 +80,7 @@ function Home() {
   </ul>
 ) : (
   <p>No books found</p>
-)}
+)}</>)}
 
 
    </div>
