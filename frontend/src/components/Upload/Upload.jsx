@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import "./Upload.css"
 import axios from 'axios';
+import LoadingSpinner from '../Loading/LoadingSpinner';
 
 function Upload() {
   const token = window.localStorage.getItem("token");
@@ -13,6 +14,9 @@ function Upload() {
     bookFile: null,
     genre: "" // Add this line
   });
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleImageChange = (event) => {
     setBook({ ...book, bookImage: event.target.files[0] });
@@ -36,6 +40,8 @@ function Upload() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+    setError('');
     console.log(book);
 
     try {
@@ -55,17 +61,31 @@ function Upload() {
       console.log("book upload successful", response.data);
       if (response) {
         alert("uploaded successfully");
+        setIsLoading(false);
       }
-    } catch (error) {
+
+    } 
+    
+    catch (error) {
       console.log(" book upload failed", error);
-    }
+
+      setIsLoading(false);
+      alert("book upload failed (Try with less mb file)   ")
+
+      
+    } 
   };
 
   const genres = ["Fiction", "Non-Fiction", "Romance", "Mystery", "Thriller", "Spritual" , "Science and Technology"]; 
 
   return (
     <div className="upload-container">
+
+{isLoading ? (
+        <LoadingSpinner />
+      ) : ( <>
       <h2>Upload Your Own</h2>
+      {error && <p className="error-message">{error}</p>}
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="bookName">Book Name:</label>
@@ -125,6 +145,8 @@ function Upload() {
 
         <button type="submit">Upload</button>
       </form>
+      </>
+      )}
     </div>
   );
 }

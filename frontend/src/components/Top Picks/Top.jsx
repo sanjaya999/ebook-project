@@ -1,18 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import LoadingSpinner from '../Loading/LoadingSpinner';
+
 
 const TopPicks = () => {
   const [books, setBooks] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
 
   useEffect(() => {
     const fetchBooks = async () => {
+      setIsLoading(true);
       try {
         const response = await axios.get('http://localhost:5000/api/v1/user/topPicks');
         console.log(response.data.data)
         setBooks(response.data.data);
+        setIsLoading(false);
+
 
       } catch (error) {
         console.error('Error fetching books:', error);
+        
       }
     };
 
@@ -21,7 +29,12 @@ const TopPicks = () => {
 
   return (
     <div>
+
+{isLoading ? (
+        <LoadingSpinner />
+      ) : ( <>
     <h1>Top Picks</h1>
+    
     <ul className="book-list">
       {Array.isArray(books) && books.length > 0 ? (
         books.map((book) => (
@@ -43,6 +56,8 @@ const TopPicks = () => {
         <p>No books found.</p>
       )}
     </ul>
+    </>
+      )}
   </div>
   );
 };
