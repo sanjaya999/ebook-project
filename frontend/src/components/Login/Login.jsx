@@ -6,6 +6,7 @@ import axios from "axios"
 import UserContext from '../../Context/Context.js';
 import { useCookies } from 'react-cookie'
 import { useNavigate } from 'react-router-dom';
+import LoadingSpinner from '../Loading/LoadingSpinner.jsx';
 
 
 
@@ -22,6 +23,7 @@ function Login() {
     });
     const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
     const handleInput = (e)=>{
         const {name , value} = e.target;
@@ -37,15 +39,18 @@ function Login() {
         e.preventDefault();
         setEmailError(false);
         setPasswordError(false);
+        setIsLoading(true);
     
         // Validate the input fields
         if (userlogin.email === '') {
           setEmailError(true);
+          setIsLoading(false);
           return;
         }
     
         if (userlogin.password === '') {
           setPasswordError(true);
+          setIsLoading(false);
           return;
         }
 
@@ -95,6 +100,7 @@ function Login() {
         }
         catch(error){
             console.log("login failed in login.jsx" , error);
+            setIsLoading(false);
         }
     }
 
@@ -103,6 +109,9 @@ function Login() {
   return (
     <div className='middle'>
        
+       {isLoading ? (
+                <LoadingSpinner />
+            ) : (
        
         <form action=""  onSubmit={handleSubmit}>
         <h2 >Login</h2>
@@ -133,7 +142,7 @@ function Login() {
             
         </form>
 
-       
+            )}
 
     </div>
   )
