@@ -331,10 +331,26 @@ const registerUser = asyncHandler(async(req,res) => {
         }
     })
 
+    const changePasswrord = asyncHandler(async(req , res)=>{
+        const {oldPassword , newPassword } = req.body;
+
+        const user = await User.findById(req.user?._id)
+       
+
+        const isPasswordValid = await user.isPasswordCorrect(oldPassword);
+        if(!isPasswordValid){
+            throw new ApiError(400 , "old password incorrect")
+        }
+
+        user.password = newPassword 
+        await user.save({validateBeforeSave : false})
+        return res.status(200)
+        .json(new ApiResponse(200 , "Password changed successfully"))
+    })
 
 
  
 
 export {registerUser , loginUser,logoutUser , userDetail,
      handleFile , fetchBook , search , topPicks, adminFetchBooks ,
-     adminFetchUsers , deleteBook ,deleteUser ,userApprove} 
+     adminFetchUsers , deleteBook ,deleteUser ,userApprove ,changePasswrord} 
