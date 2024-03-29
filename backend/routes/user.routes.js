@@ -3,7 +3,7 @@ import { upload } from "../middlewares/multer.middleware.js";
 import { registerUser,loginUser,logoutUser,userDetail ,
     handleFile, fetchBook, search, topPicks , 
     adminFetchBooks, adminFetchUsers, deleteUser , deleteBook,
-    userApprove} from "../controllers/user.controller.js";
+    userApprove , changePasswrord} from "../controllers/user.controller.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 
 const router = Router();
@@ -38,6 +38,7 @@ router.route("/adminUsers").get(verifyJWT , adminFetchUsers)
 router.route("/adminDeleteUser").delete(verifyJWT,deleteUser)
 router.route("/adminDeleteBook").delete(verifyJWT,deleteBook)
 router.route("/approveUser").put(verifyJWT , userApprove)
+router.route("/changePassword").post(verifyJWT , changePasswrord)
 
 
 
