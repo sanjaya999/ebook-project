@@ -113,3 +113,37 @@
   .foryou-book-list::-webkit-scrollbar {
     display: none; /* For Chrome, Safari, and Opera */
   }
+
+/* Foryou.css */
+.FYP {
+  padding: 0.4rem 0.8rem; /* Smaller padding */
+  font-size: 0.9rem; /* Smaller font size */
+  border-radius: 0.25rem; /* Rounded corners */
+  background-color: #e65c4f; /* Purple background */
+  color: #fff; /* White text */
+  border: none; /* Remove default button border */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+  cursor: pointer; /* Change cursor on hover */
+}
+
+.FYP:hover {
+  background-color: #a29bfe; /* Lighter purple on hover */
+}
+
+/* Foryou.css */
+.FYN{
+  padding: 0.4rem 0.8rem; /* Smaller padding */
+  font-size: 0.9rem; /* Smaller font size */
+  border-radius: 0.25rem; /* Rounded corners */
+  background-color: #e65c4f; /* Purple background */
+  color: #fff; /* White text */
+  border: none; /* Remove default button border */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+  cursor: pointer; /* Change cursor on hover */
+}
+
+.FYN:hover {
+  background-color: #a29bfe; /* Lighter purple on hover */
+}
