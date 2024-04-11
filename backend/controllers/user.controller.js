@@ -349,8 +349,19 @@ const registerUser = asyncHandler(async(req,res) => {
     })
 
 
+    const notLoggedin = asyncHandler(async (req, res) => {
+        try {
+            const books = await Book.find({}, { bookName: 1, bookImage: 1, description: 1, uploadedBy: 1 , genre :1 });
+      
+          return res.status(200).json(new ApiResponse(200, books, "Book list fetched"));
+        } catch (err) {
+          throw new ApiError(500, "Error fetching book list");
+        }
+      });
+
+
  
 
 export {registerUser , loginUser,logoutUser , userDetail,
      handleFile , fetchBook , search , topPicks, adminFetchBooks ,
-     adminFetchUsers , deleteBook ,deleteUser ,userApprove ,changePasswrord} 
+     adminFetchUsers , deleteBook ,deleteUser ,userApprove ,changePasswrord,notLoggedin} 
