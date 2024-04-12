@@ -256,7 +256,7 @@ const registerUser = asyncHandler(async(req,res) => {
     })
 
     const topPicks = asyncHandler(async(req, res)=>{
-        const books = await Book.find({}).sort({accessCount : -1});
+        const books = await Book.find({}).sort({ approved:1 , accessCount : -1});
         return res.status(200)
         .json(new ApiResponse(200 , books , "these are top books"));
     })
@@ -351,7 +351,7 @@ const registerUser = asyncHandler(async(req,res) => {
 
     const notLoggedin = asyncHandler(async (req, res) => {
         try {
-            const books = await Book.find({}, { bookName: 1, bookImage: 1, description: 1, uploadedBy: 1 , genre :1 });
+            const books = await Book.find({}, { bookName: 1, bookImage: 1, description: 1, uploadedBy: 1 , genre :1, accessCount:1 , approved: 1});
       
           return res.status(200).json(new ApiResponse(200, books, "Book list fetched"));
         } catch (err) {
@@ -359,9 +359,99 @@ const registerUser = asyncHandler(async(req,res) => {
         }
       });
 
+      const bookApproved = asyncHandler(async (req, res) => {
+        const { bookId } = req.query;
+        const { isApproved } = req.body;
+    
+        try {
+            const book = await Book.findById(bookId);
+    
+            if (!book) {
+                return new ApiError(404, "no book found")
+            }
+    
+            book.approved = isApproved;
+            await book.save();
+    
+            return res.status(200)
+                .json(new ApiResponse(200, "book Approved"))
+        }
+        catch (error) {
+            return res.status(500)
+                .json(new ApiError(500, "error at bookApprove"))
+        }
+    })
+
+    const bookmark = asyncHandler(async(req , res)=>{
+        try {
+            const userId = req.user.id;
+            const { bookId } = req.body;
+
+        
+            const user = await User.findByIdAndUpdate(userId, 
+              { $addToSet: { bookmarks: bookId } }, 
+              { new: true } 
+            );
+        
+           return res.status(200)
+           .json(new ApiResponse(200 , { bookmarks: user.bookmarks })); 
+          } catch (err) {
+            return res.status(500)
+            .json(new ApiError(500 , { error: 'Error adding bookmark' }));
+          }
+    })
+
+    const getbookmark = asyncHandler(async(req, res) => {
+        try {
+            const {userId} = req.body;
+            console.log("this is user id from get" , userId);
+            const user = await User.findById(userId)
+                                    .populate({
+                                        path: 'bookmarks',
+                                        model: 'Book' // This should match the model name you used in mongoose.model call
+                                    });
+    
+            if (!user) {
+                return res.status(404).json(new ApiError(404, { error: 'User not found' }));
+            }
+    
+            return res.status(200).json(new ApiResponse(200, { bookmarks: user.bookmarks }));
+        } catch (err) {
+            res.status(500).json(new ApiError(500, { error: 'Error fetching bookmarks' }));
+        }
+    });
+
+    const deleteBookmark = asyncHandler(async (req, res) => {
+        try {
+          const userId = req.user.id;
+          console.log(userId);
+          const { bookId } = req.params;
+          console.log(bookId);
+
+      
+          const user = await User.findByIdAndUpdate(
+            userId,
+            { $pull: { bookmarks: bookId } },
+            { new: true }
+          );
+      
+          return res.status(200).json(
+            new ApiResponse(200, {
+              bookmarks: user.bookmarks,
+            })
+          );
+        } catch (err) {
+          return res.status(500).json(
+            new ApiError(500, {
+              error: 'Error deleting bookmark',
+            })
+          );
+        }
+      });
+    
+      
 
  
-
 export {registerUser , loginUser,logoutUser , userDetail,
      handleFile , fetchBook , search , topPicks, adminFetchBooks ,
-     adminFetchUsers , deleteBook ,deleteUser ,userApprove ,changePasswrord,notLoggedin} 
+     adminFetchUsers , deleteBook,bookmark ,deleteBookmark,getbookmark,deleteUser ,userApprove ,changePasswrord,notLoggedin, bookApproved} 
