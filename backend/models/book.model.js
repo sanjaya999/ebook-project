@@ -35,6 +35,10 @@ const pdfSchema = new mongoose.Schema(
       type: String,
       required: true ,
       default: 'Unknown'
+    },
+    approved: {
+      type: Boolean, 
+      default: false 
     }
 }
 , { timestamps: true });
