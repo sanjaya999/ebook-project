@@ -12,6 +12,7 @@ function UserProfile() {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [bookmarks , setBookmarks] = useState("")
 
   useEffect(() => {
     const fetchData = async () => {
@@ -63,6 +64,33 @@ function UserProfile() {
       setMessage(error.response.data.message);
     }
   };
+
+  useEffect(() => {
+    const fetchBookmarks = async () => {
+      try {
+        const config = {
+          headers: {
+            Authorization:`Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        };
+  
+        const userId = window.localStorage.getItem("userID");
+  
+        const response = await axios.post(
+          `http://localhost:5000/api/v1/user/getbookmarks`,
+          { userId }, // Send the user ID in the request body
+          config
+        );
+  
+        console.log("this is fetch book" ,response.data.data.bookmarks);
+        setBookmarks(response.data.data.bookmarks);
+      } catch (error) {
+        console.error('Error fetching bookmarks:', error);
+      }
+    };
+    fetchBookmarks();
+  }, []); 
 
   return (
     <div>
@@ -116,7 +144,26 @@ function UserProfile() {
           </div>
         )}
       </div>
+
+<div className="user-profile-bookmarks">
+  <h2>Bookmarked Books</h2>
+  {bookmarks.length === 0 ? (
+    <p>You don't have any bookmarks yet.</p>
+  ) : (
+    <ul className="user-profile-book-list">
+      {bookmarks.map((book) => (
+        <li key={book._id}>
+           <h2>{book.bookName}</h2>
+                <p>{book.description}</p>
+        </li>
+      ))}
+    </ul>
+  )}
+</div>
+
     </div>
+    
+    
   );
 }
 
