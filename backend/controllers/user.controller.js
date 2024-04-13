@@ -385,8 +385,8 @@ const registerUser = asyncHandler(async(req,res) => {
     const bookmark = asyncHandler(async(req , res)=>{
         try {
             const userId = req.user.id;
-            const { bookId } = req.body;
-
+            console.log(userId);
+            const  bookId  = req.params.bookId;
         
             const user = await User.findByIdAndUpdate(userId, 
               { $addToSet: { bookmarks: bookId } }, 
@@ -425,7 +425,7 @@ const registerUser = asyncHandler(async(req,res) => {
         try {
           const userId = req.user.id;
           console.log(userId);
-          const { bookId } = req.params;
+          const  bookId  = req.params.bookId;
           console.log(bookId);
 
       
