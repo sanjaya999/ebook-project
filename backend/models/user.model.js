@@ -41,7 +41,9 @@ const userSchema = new Schema({
 
     refreshToken : {
         type : String,
-    }
+    },
+    bookmarks: [{ type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Book' }],
    
 
 
