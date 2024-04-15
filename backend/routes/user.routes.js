@@ -2,7 +2,7 @@ import { Router } from "express";
 import { upload } from "../middlewares/multer.middleware.js";
 import { registerUser,loginUser,logoutUser,userDetail ,
     handleFile, fetchBook, search, topPicks , 
-    adminFetchBooks, adminFetchUsers, deleteUser , deleteBook,notLoggedin,
+    adminFetchBooks,getbookmark,deleteBookmark, bookmark,adminFetchUsers, deleteUser , deleteBook,notLoggedin,bookApproved,
     userApprove , changePasswrord} from "../controllers/user.controller.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 
@@ -34,7 +34,7 @@ router.route("/upload").post(verifyJWT, upload.fields([
 
 router.route("/explore").get(verifyJWT , fetchBook)
 router.route("/search").get(search)
-router.route("/topPicks").get( topPicks)
+router.route("/topPicks").get( verifyJWT ,topPicks)
 
 router.route("/adminBooks").get( verifyJWT , adminFetchBooks)
 router.route("/adminUsers").get(verifyJWT , adminFetchUsers)
@@ -43,6 +43,18 @@ router.route("/adminDeleteBook").delete(verifyJWT,deleteBook)
 router.route("/approveUser").put(verifyJWT , userApprove)
 router.route("/changePassword").post(verifyJWT , changePasswrord)
 router.route("/notLoggedin").get(notLoggedin)
+router.route("/adminApproveBook").put(verifyJWT , bookApproved)
+
+
+
+router.route("/bookmarks/:bookId")
+.post(verifyJWT , bookmark)
+.delete(verifyJWT, deleteBookmark)
+router.route("/getbookmarks").post(verifyJWT ,getbookmark)
+
+
+
+
 
 
 
