@@ -1,65 +1,100 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import LoadingSpinner from '../Loading/LoadingSpinner';
+import './Top.css';
 
-
-const TopPicks = () => {
+function Top() {
   const [books, setBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
+  const isLoggedIn = localStorage.getItem('loggedIn');
+  const accessToken = localStorage.getItem('token');
 
   useEffect(() => {
     const fetchBooks = async () => {
       setIsLoading(true);
+
       try {
-        const response = await axios.get('http://localhost:5000/api/v1/user/topPicks');
-        console.log(response.data.data)
-        setBooks(response.data.data);
-        setIsLoading(false);
+        let response;
+        if (isLoggedIn === 'true') {
+          const config = {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          };
+          response = await axios.get(
+            'http://localhost:5000/api/v1/user/topPicks',
+            config
+          );
+          const filteredBooks = response.data.data.filter(book => book.approved === true);
+          const sortedBooks = filteredBooks.sort((a, b) => b.accessCount - a.accessCount);
+          setBooks(sortedBooks); 
+        } else {
+          response = await axios.get('http://localhost:5000/api/v1/user/notLoggedin');
+          console.log(response.data.data)
+          const filteredBooks = response.data.data.filter(book => book.approved === true);
+          const sortedBooks = filteredBooks.sort((a, b) => b.accessCount - a.accessCount);
+          setBooks(sortedBooks); 
 
-
-      } catch (error) {
-        console.error('Error fetching books:', error);
+        }
         
+        
+        setIsLoading(false);
+      } catch (err) {
+        console.error(err);
+        setIsLoading(false);
       }
     };
 
     fetchBooks();
-  }, []);
+  }, [isLoggedIn, accessToken]);
+
+  const handleBookClick = (bookFile) => {
+    window.open(bookFile, '_blank');
+  };
 
   return (
-    <div>
-
-{isLoading ? (
+    <div className="app-top-book-list-container">
+      {isLoading ? (
         <LoadingSpinner />
-      ) : ( <>
-    <h1>Top Picks</h1>
-    
-    <ul className="book-list">
-      {Array.isArray(books) && books.length > 0 ? (
-        books.map((book) => (
-          <li key={book._id} className="book-item">
-            <div className="book-image-container">
-              <img src={book.bookImage} alt={book.bookName} className="book-image" />
-            </div>
-            <div className="book-details">
-              <h2 className="book-title">{book.bookName}</h2>
-              <p>{book.description}</p>
-              <p>Access Count: {book.accessCount}</p>
-              <a href={book.bookFile} target="_blank" rel="noopener noreferrer" className="book-download">
-                Download Book
-              </a>
-            </div>
-          </li>
-        ))
       ) : (
-        <p>No books found.</p>
+        <>
+          <h1 className="app-top-book-list-title">Top Picks</h1>
+          <div className="app-top-book-list">
+            {books.map((book, index) => (
+              <div key={index} className="app-top-book-item">
+                <div className="app-top-book-image-container">
+                  <img
+                    className="app-top-book-image"
+                    src={book.bookImage}
+                    alt={book.bookName}
+                  />
+                </div>
+                <div className="app-top-book-details">
+                  <h3 className="app-top-book-title">{book.bookName}</h3>
+                  <p className="app-top-book-description">
+                    Description: {book.description}
+                  </p>
+                  <p className="app-top-book-access-count">
+                    Access Count: {book.accessCount}
+                  </p>
+                  {isLoggedIn === 'true' && (
+                    <div className="app-top-book-download-link">
+                      <button
+                        className="app-top-book-download-btn"
+                        onClick={() => handleBookClick(book.bookFile)}
+                      >
+                        Download Book
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
       )}
-    </ul>
-    </>
-      )}
-  </div>
+    </div>
   );
-};
+}
 
-export default TopPicks;
+export default Top;
