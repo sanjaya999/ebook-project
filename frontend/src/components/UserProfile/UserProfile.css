@@ -273,4 +273,78 @@ body {
     font-size: 1rem;
     padding: 0.6rem 1.2rem;
   }
+}.card.user-profile-bookmarks {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.card.user-profile-bookmarks button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.card.user-profile-bookmarks button:hover {
+  background-color: #0056b3;
+}
+
+.card.user-profile-bookmarks h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.card.user-profile-bookmarks .user-profile-book-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.card.user-profile-bookmarks .user-profile-book-list li {
+  width: calc(33.33% - 20px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+  margin-bottom: 20px;
+}
+
+.card.user-profile-bookmarks .user-profile-book-list li h2 {
+  font-size: 16px;
+  margin: 10px 0;
+  text-align: center;
+}
+
+.card.user-profile-bookmarks .user-profile-book-list li img {
+  max-width: 80%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.card.user-profile-bookmarks .user-profile-book-list li .app-explore-book-download-btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: auto;
+}
+
+.card.user-profile-bookmarks .user-profile-book-list li .app-explore-book-download-btn:hover {
+  background-color: #0056b3;
 }
