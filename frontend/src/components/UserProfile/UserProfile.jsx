@@ -13,6 +13,7 @@ function UserProfile() {
   const [newPassword, setNewPassword] = useState("");
   const [message, setMessage] = useState("");
   const [bookmarks , setBookmarks] = useState("")
+  const [showBookmarks, setShowBookmarks] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -92,6 +93,14 @@ function UserProfile() {
     fetchBookmarks();
   }, []); 
 
+  const toggleBookmarks = () => {
+    setShowBookmarks(!showBookmarks);
+  };
+  const handleBookClick = (bookFile) => {
+    window.open(bookFile, '_blank');
+  };
+  
+
   return (
     <div>
       <h2>My Profile</h2>
@@ -144,20 +153,32 @@ function UserProfile() {
           </div>
         )}
       </div>
-
-<div className="user-profile-bookmarks">
-  <h2>Bookmarked Books</h2>
-  {bookmarks.length === 0 ? (
-    <p>You don't have any bookmarks yet.</p>
-  ) : (
-    <ul className="user-profile-book-list">
-      {bookmarks.map((book) => (
-        <li key={book._id}>
-           <h2>{book.bookName}</h2>
-                <p>{book.description}</p>
-        </li>
-      ))}
-    </ul>
+      <div className="card user-profile-bookmarks">
+  <button onClick={toggleBookmarks}>
+    {showBookmarks ? 'Hide Bookmarks' : 'Show Bookmarks'}
+  </button>
+  {showBookmarks && (
+    <div>
+      <h2>Bookmarked Books</h2>
+      {bookmarks.length === 0 ? (
+        <p>You don't have any bookmarks yet.</p>
+      ) : (
+        <ul className="user-profile-book-list">
+          {bookmarks.map((book) => (
+            <li key={book._id}>
+              <h2>{book.bookName}</h2>
+              <img src={book.bookImage} alt="" srcset="" />
+              <button
+                      className="app-explore-book-download-btn"
+                      onClick={() => handleBookClick(book.bookFile)}
+                    >
+                      Download Book
+                    </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
   )}
 </div>
 
