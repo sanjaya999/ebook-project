@@ -28,6 +28,7 @@ function Foryou() {
             : 'http://localhost:5000/api/v1/user/notLoggedin',
           isLoggedIn === 'true' ? config : {}
         );
+        console.log(response.data.data);
         const filterBook = response.data.data.filter(book => book.approved === true);
         setBooks(filterBook);
         setIsLoading(false);
