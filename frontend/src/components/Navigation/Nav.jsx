@@ -78,6 +78,9 @@ function Nav() {
             </li>
             {name ?(
               <li className="start">
+                 <NavLink to="/suggest" className ={ ({isActive})=> `${isActive? "yes-nav-text" : "no-nav-text"}`}>
+                Suggest
+                  </NavLink>
                 <NavLink to="/user" className="logname">{name}</NavLink>
                 <button onClick={handleLogout} className="login">
                   Logout
