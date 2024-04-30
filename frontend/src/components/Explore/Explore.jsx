@@ -48,13 +48,22 @@ function Explore() {
         const userId = window.localStorage.getItem("userID");
   
         const response = await axios.post(
-          `http://localhost:5000/api/v1/user/bookmarks`,
+          `http://localhost:5000/api/v1/user/getbookmarks`,
           { userId }, // Send the user ID in the request body
           config
         );
   
         console.log("this is fetch book" ,response.data.data);
-        setBookmarks(response.data.data.bookmarks);
+        const fetchedBookmarkIds = response.data.data.bookmarks.map(bookmark => bookmark._id); 
+        setBookmarks(fetchedBookmarkIds);
+
+        const updatedBooks = books.map(book => ({
+          ...book,
+          isBookmarked: fetchedBookmarkIds.includes(book._id)
+        }));
+        setBooks(updatedBooks);
+      
+
       } catch (error) {
         console.error('Error fetching bookmarks:', error);
       }
@@ -115,6 +124,7 @@ function Explore() {
       console.error('Error updating bookmark:', error);
     }
   };
+  
 
   return (
     <div className="app-explore-book-list-container">
