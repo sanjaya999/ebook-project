@@ -73,6 +73,7 @@ const registerUser = asyncHandler(async(req,res) => {
             email,
             password,
             profile : profile.url || "",
+            newUser : true,
             
 
         })
@@ -131,7 +132,8 @@ const registerUser = asyncHandler(async(req,res) => {
          .cookie("refreshToken" , refreshToken,option)
          .json(
             new ApiResponse(200,{
-                user : loggedInUser , accessToken , refreshToken
+                user : loggedInUser , accessToken , refreshToken ,
+                isNewUser: user.newUser,
 
             },
             "user logged in successful")
@@ -448,10 +450,76 @@ const registerUser = asyncHandler(async(req,res) => {
           );
         }
       });
+
+
+      const updateGenre = asyncHandler(async (req, res) => {
+        try {
+            const {userId} = req.body;
+            const newGenres = req.body.genres;
+            console.log(newGenres);
+    
+            if (!userId) {
+                return res.status(400).json(new ApiResponse(400, "Please provide a userId"));
+            }
+    
+            if (!newGenres) {
+                return res.status(400).json(new ApiResponse(400, "Please provide genres to update"));
+            }
+    
+            // Find and Update User (set isNewUser to false)
+            const user = await User.findByIdAndUpdate(userId, {
+                genres: newGenres,
+                newUser: false 
+            }, { new: true }); 
+    
+            if (!user) {
+                return res.status(404).json(new ApiResponse(404, "User not found"));
+            }
+    
+            // Send Success Response
+            res.json(new ApiResponse(200, "Genres and status updated successfully"));
+    
+        } catch (error) {
+            console.error("Error updating genre:", error);
+            res.status(500).json(new ApiError(500, "Error updating genres and status"));
+        }
+    });
+
+    const fetchGenre = asyncHandler(async (req, res) => {
+        
+        const {userId} = req.body;
+                  const user = await User.findById(userId);
+          console.log(" this is fetchgenre userid " + userId);
+      
+          if (!user) {
+            throw new ApiError(404, "User not found");
+          }
+      
+          const userGenres = user.genres;
+      
+          let books;
+      
+          if (userGenres.length > 0) {
+            books = await Book.find({ genre: { $in: userGenres } });
+          } else {
+            books = await Book.find({});
+          }
+      
+          for (const book of books) {
+            book.accessCount += 1;
+            await book.save();
+          }
+      
+          return res.status(201).json(new ApiResponse(200, books, "book fetched"));
+       
+      });
+    
+
     
       
 
  
 export {registerUser , loginUser,logoutUser , userDetail,
      handleFile , fetchBook , search , topPicks, adminFetchBooks ,
-     adminFetchUsers , deleteBook,bookmark ,deleteBookmark,getbookmark,deleteUser ,userApprove ,changePasswrord,notLoggedin, bookApproved} 
+     adminFetchUsers , deleteBook,bookmark ,deleteBookmark,getbookmark,deleteUser ,userApprove ,changePasswrord,notLoggedin, bookApproved
+    ,updateGenre, fetchGenre} 
