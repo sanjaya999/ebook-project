@@ -44,6 +44,13 @@ const userSchema = new Schema({
     },
     bookmarks: [{ type: mongoose.Schema.Types.ObjectId, 
         ref: 'Book' }],
+
+        newUser: {
+            type: Boolean,
+            default: true
+        },
+        
+        genres: [{ type: String }]
    
 
 
