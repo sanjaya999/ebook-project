@@ -3,7 +3,7 @@ import { upload } from "../middlewares/multer.middleware.js";
 import { registerUser,loginUser,logoutUser,userDetail ,
     handleFile, fetchBook, search, topPicks , 
     adminFetchBooks,getbookmark,deleteBookmark, bookmark,adminFetchUsers, deleteUser , deleteBook,notLoggedin,bookApproved,
-    userApprove , changePasswrord} from "../controllers/user.controller.js";
+    userApprove , changePasswrord , updateGenre,fetchGenre} from "../controllers/user.controller.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 
 const router = Router();
@@ -51,6 +51,11 @@ router.route("/bookmarks/:bookId")
 .post(verifyJWT , bookmark)
 .delete(verifyJWT, deleteBookmark)
 router.route("/getbookmarks").post(verifyJWT ,getbookmark)
+
+
+router.route("/updateGenre").put(verifyJWT , updateGenre)
+router.route("/fetchGenre").post(fetchGenre)
+
 
 
 
