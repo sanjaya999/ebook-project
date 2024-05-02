@@ -14,6 +14,8 @@ import { useCookies } from 'react-cookie';
 import Upload from './components/Upload/Upload.jsx';
 import Admin from './components/UserProfile/Admin.jsx';
 import Foryou from './components/ForYou/Foryou.jsx';
+import Suggest from './components/Suggest/Suggest.jsx';
+import Select from './components/SelectGenre/Select.jsx';
 
 
 const App = () =>{
@@ -42,11 +44,18 @@ const App = () =>{
         <Route path="Home" element={<Home />} />
         <Route path="Explore" element={<Explore />} />
         <Route path="Top" element={<Top />} />
+        <Route path="select" element= {<Select/>} />
+
+        
+
+
         <Route path='Login' element={
           isLoggedIn? <UserProfile/> : <Login/>} />
         <Route path='Register' element={<Register />} />
         <Route path='user' element={
           isLoggedIn? <UserProfile/> : <Login/>}/>
+          <Route path='suggest' element={
+          isLoggedIn? <Suggest/> : <Login/>}/>
         <Route path='upload' element={  isLoggedIn? <Upload/>:<Login/>}/>
         <Route path='admin' element={  isAdmin? <Admin/>:<UserProfile/>}/>
 
