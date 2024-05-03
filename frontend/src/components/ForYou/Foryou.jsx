@@ -10,7 +10,7 @@ function Foryou() {
   const isLoggedIn = localStorage.getItem('loggedIn');
   const accessToken = localStorage.getItem('token');
 
-  const genres = ["Fiction", "Non-Fiction", "Romance", "Mystery", "Thriller", "Spiritual", "Science and Technology"];
+  const genres = ["Fiction", "Non-Fiction", "Romance", "Mystery", "Thriller", "Spritual", "Science and Technology"];
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -78,7 +78,7 @@ function Foryou() {
                           rel="noopener noreferrer"
                           className="foryou-book-download-btn"
                         >
-                          Download Book
+                          Read Book
                         </a>
                       )}
                     </div>

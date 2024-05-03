@@ -92,7 +92,7 @@
   /* Download Button */
   .foryou-book-download-btn {
     display: inline-block;
-    background-color: #007bff;
+    background-color: #e65c4f;
     color: #fff;
     text-decoration: none;
     padding: 0.5rem 1rem;
@@ -101,7 +101,7 @@
   }
   
   .foryou-book-download-btn:hover {
-    background-color: #0056b3;
+    background-color: #e65c4f;
   }
 
   .foryou-genre-containers {
