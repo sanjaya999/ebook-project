@@ -162,7 +162,7 @@ function Explore() {
                       className="app-explore-book-download-btn"
                       onClick={() => handleBookClick(book.bookFile)}
                     >
-                      Download Book
+                      Read Book
                     </button>
                   </div>
                 )}
