@@ -83,7 +83,7 @@ function Top() {
                         className="app-top-book-download-btn"
                         onClick={() => handleBookClick(book.bookFile)}
                       >
-                        Download Book
+                        Read Book
                       </button>
                     </div>
                   )}

@@ -60,7 +60,7 @@ function Nav() {
             <li>
               <NavLink to="/foryou" className ={ ({isActive})=> `${isActive? "yes-nav-text" : "no-nav-text"}`}>
               
-                For You
+                All Genre
               </NavLink>
             </li>
 
@@ -79,7 +79,7 @@ function Nav() {
             {name ?(
               <li className="start">
                  <NavLink to="/suggest" className ={ ({isActive})=> `${isActive? "yes-nav-text" : "no-nav-text"}`}>
-                Suggest
+                Recommendation
                   </NavLink>
                 <NavLink to="/user" className="logname">{name}</NavLink>
                 <button onClick={handleLogout} className="login">

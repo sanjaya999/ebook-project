@@ -98,7 +98,7 @@ function Home() {
                           rel="noopener noreferrer"
                           download=""
                         >
-                          Download Book
+                          Read Book
                         </a>
                       )}
                     </div>
