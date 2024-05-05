@@ -12,7 +12,8 @@ function UserProfile() {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [message, setMessage] = useState("");
-  const [bookmarks , setBookmarks] = useState("")
+  const [bookmarks, setBookmarks] = useState([]);
+  const [bookmarkedIds, setBookmarkedIds] = useState([]);
   const [showBookmarks, setShowBookmarks] = useState(false);
 
   useEffect(() => {
@@ -71,35 +72,65 @@ function UserProfile() {
       try {
         const config = {
           headers: {
-            Authorization:`Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
         };
-  
+
         const userId = window.localStorage.getItem("userID");
-  
+
         const response = await axios.post(
           `http://localhost:5000/api/v1/user/getbookmarks`,
-          { userId }, // Send the user ID in the request body
+          { userId },
           config
         );
-  
-        console.log("this is fetch book" ,response.data.data.bookmarks);
-        setBookmarks(response.data.data.bookmarks);
+
+        const fetchedBookmarks = response.data.data.bookmarks;
+        setBookmarks(fetchedBookmarks);
+        const fetchedBookmarkIds = fetchedBookmarks.map(bookmark => bookmark._id);
+        setBookmarkedIds(fetchedBookmarkIds);
       } catch (error) {
         console.error('Error fetching bookmarks:', error);
       }
     };
+
     fetchBookmarks();
-  }, []); 
+  }, [token]);
 
   const toggleBookmarks = () => {
     setShowBookmarks(!showBookmarks);
   };
+
   const handleBookClick = (bookFile) => {
     window.open(bookFile, '_blank');
   };
-  
+
+  const handleBookmarkClick = async (bookId) => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const isBookmarked = bookmarkedIds.includes(bookId);
+      const response = await axios({
+        method: isBookmarked ? 'DELETE' : 'POST',
+        url: `http://localhost:5000/api/v1/user/bookmarks/${bookId}`,
+        headers: config.headers,
+      });
+
+      if (response.status === 200) {
+        if (isBookmarked) {
+          setBookmarkedIds(bookmarkedIds.filter(id => id !== bookId));
+        } else {
+          setBookmarkedIds([...bookmarkedIds, bookId]);
+        }
+      }
+    } catch (error) {
+      console.error('Error updating bookmark:', error);
+    }
+  };
 
   return (
     <div>
@@ -154,37 +185,40 @@ function UserProfile() {
         )}
       </div>
       <div className="card user-profile-bookmarks">
-  <button onClick={toggleBookmarks}>
-    {showBookmarks ? 'Hide Bookmarks' : 'Show Bookmarks'}
-  </button>
-  {showBookmarks && (
-    <div>
-      <h2>Bookmarked Books</h2>
-      {bookmarks.length === 0 ? (
-        <p>You don't have any bookmarks yet.</p>
-      ) : (
-        <ul className="user-profile-book-list">
-          {bookmarks.map((book) => (
-            <li key={book._id}>
-              <h2>{book.bookName}</h2>
-              <img src={book.bookImage} alt="" srcset="" />
-              <button
+        <button onClick={toggleBookmarks}>
+          {showBookmarks ? 'Hide Bookmarks' : 'Show Bookmarks'}
+        </button>
+        {showBookmarks && (
+          <div>
+            <h2>Bookmarked Books</h2>
+            {bookmarks.length === 0 ? (
+              <p>You don't have any bookmarks yet.</p>
+            ) : (
+              <ul className="user-profile-book-list">
+                {bookmarks.map(book => (
+                  <li key={book._id}>
+                    <h2>{book.bookName}</h2>
+                    <img src={book.bookImage} alt="" srcSet="" />
+                    <button
+                      className={bookmarkedIds.includes(book._id) ? 'bookmarked' : ''}
+                      onClick={() => handleBookmarkClick(book._id)}
+                    >
+                      {bookmarkedIds.includes(book._id) ? 'Bookmarked' : 'Bookmark'}
+                    </button>
+                    <button
                       className="app-explore-book-download-btn"
                       onClick={() => handleBookClick(book.bookFile)}
                     >
-                      Download Book
+                      Read Book
                     </button>
-            </li>
-          ))}
-        </ul>
-      )}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        )}
+      </div>
     </div>
-  )}
-</div>
-
-    </div>
-    
-    
   );
 }
 
