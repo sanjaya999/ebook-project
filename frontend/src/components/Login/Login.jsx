@@ -75,7 +75,7 @@ function Login() {
             let expires = new Date()
             expires.setTime(expires.getTime() + (1 * 60 * 60 * 1000))
            
-            console.log("user LoggedIn" , response.data);
+            console.log("user LoggedIn" , response.data.data);
 
           
 
@@ -93,7 +93,8 @@ function Login() {
     
                 window.location.href = "/Login"
                 
-            }else{
+            }
+            else{
                 if(response.status) { 
                     window.localStorage.setItem("token" , accessToken)
                     window.localStorage.setItem("loggedIn" , true)
@@ -104,6 +105,9 @@ function Login() {
                     setCookie('refreshToken', refreshToken, {path: '/', expires, sameSite: 'None', secure: true })
                     
     
+                }
+                if(response.data.data.isNewUser){
+                    navigate('/select');
                 }
             }
 
