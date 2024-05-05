@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "./Admin.css";
 
+const genres = ["Fiction", "Non-Fiction", "Romance", "Mystery", "Thriller", "Spritual", "Science and Technology"];
+
 function Admin() {
   const token = window.localStorage.getItem("token");
   const _id = window.localStorage.getItem("userID");
@@ -19,17 +21,11 @@ function Admin() {
           },
         };
 
-        const booksResponse = await axios.get(
-          "http://localhost:5000/api/v1/user/adminBooks",
-          config
-        );
+        const booksResponse = await axios.get("http://localhost:5000/api/v1/user/adminBooks", config);
         console.log("this is from admin books  :", booksResponse.data.data);
         setBooks(booksResponse.data.data);
 
-        const userResponse = await axios.get(
-          "http://localhost:5000/api/v1/user/adminUsers",
-          config
-        );
+        const userResponse = await axios.get("http://localhost:5000/api/v1/user/adminUsers", config);
         console.log("this is admin users : ", userResponse.data.data);
         setUsers(userResponse.data.data);
       } catch (error) {
@@ -51,10 +47,7 @@ function Admin() {
         },
       };
 
-      await axios.delete(
-        `http://localhost:5000/api/v1/user/adminDeleteUser`,
-        config
-      );
+      await axios.delete(`http://localhost:5000/api/v1/user/adminDeleteUser`, config);
       setUsers(users.filter((user) => user._id !== userId));
     } catch (error) {
       console.error("Error deleting user:", error);
@@ -72,10 +65,7 @@ function Admin() {
         },
       };
 
-      await axios.delete(
-        `http://localhost:5000/api/v1/user/adminDeleteBook`,
-        config
-      );
+      await axios.delete(`http://localhost:5000/api/v1/user/adminDeleteBook`, config);
       setBooks(books.filter((book) => book._id !== bookId));
     } catch (error) {
       console.error("Error deleting book:", error);
@@ -93,17 +83,9 @@ function Admin() {
         },
       };
       const body = { isApproved };
-      await axios.put(
-        `http://localhost:5000/api/v1/user/adminApproveBook`,
-        body,
-        config
-      );
+      await axios.put(`http://localhost:5000/api/v1/user/adminApproveBook`, body, config);
 
-      setBooks(
-        books.map((book) =>
-          book._id === bookId ? { ...book, approved: isApproved } : book
-        )
-      ); // Update books array
+      setBooks(books.map((book) => (book._id === bookId ? { ...book, approved: isApproved } : book)));
     } catch (error) {
       console.error("Error approving book:", error);
     }
@@ -121,20 +103,21 @@ function Admin() {
         },
       };
       const body = { isApproved };
-      await axios.put(
-        `http://localhost:5000/api/v1/user/approveUser`,
-        body,
-        config
-      );
+      await axios.put(`http://localhost:5000/api/v1/user/approveUser`, body, config);
 
-      setUsers(
-        users.map((user) =>
-          user._id === userId ? { ...user, isApproved } : user
-        )
-      );
+      setUsers(users.map((user) => (user._id === userId ? { ...user, isApproved } : user)));
     } catch (error) {
       console.error("Error approving/disapproving user:", error);
     }
+  };
+
+  const groupBooksByGenre = () => {
+    const booksByGenre = genres.reduce((acc, genre) => {
+      const booksInGenre = books.filter((book) => book.genre === genre);
+      acc[genre] = booksInGenre;
+      return acc;
+    }, {});
+    return booksByGenre;
   };
 
   return (
@@ -142,79 +125,84 @@ function Admin() {
       <h1 className="admin-title">Admin Dashboard</h1>
 
       <div className="users-section">
-        <h2 className="section-title">Users</h2>
-        <ul className="user-list">
-          {users.map((user) => (
-            <li key={user._id} className="user-item">
-              <span className="user-name">
-                {user.name} ({user.email})
-              </span>
-              <span
-                className={`approval-status ${
-                  user.isApproved ? "approved" : "not-approved"
-                }`}
-              >
-                {user.isApproved ? "Approved" : "Not Approved"}
-              </span>
-              <button
-                className="approval-button"
-                onClick={() => approved(user._id, true)}
-              >
-                Approve
-              </button>
-              <button
-                className="disapproval-button"
-                onClick={() => approved(user._id, false)}
-              >
-                Disapprove
-              </button>
-              <button
-                className="delete-button"
-                onClick={() => handleDeleteUser(user._id)}
-              >
-                Delete
-              </button>
-            </li>
-          ))}
-        </ul>
+        <h2 className="section-title">Users ({users.length})</h2>
+        <table className="user-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Approval Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user) => (
+              <tr key={user._id}>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>
+                  <span className={`approval-status ${user.isApproved ? "approved" : "not-approved"}`}>
+                    {user.isApproved ? "Approved" : "Not Approved"}
+                  </span>
+                </td>
+                <td>
+                  <button className="approval-button" onClick={() => approved(user._id, true)}>
+                    Approve
+                  </button>
+                  <button className="disapproval-button" onClick={() => approved(user._id, false)}>
+                    Disapprove
+                  </button>
+                  <button className="delete-button" onClick={() => handleDeleteUser(user._id)}>
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
       <div className="books-section">
-        <h2 className="section-title">Books</h2>
-        <ul className="book-list">
-          {books.map((book) => (
-            <li key={book._id} className="book-item">
-              <span className="book-title">
-                {book.bookName}
-              </span>
-              <span
-                className={`approval-status ${
-                  book.approved ? "approved" : "not-approved"
-                }`}
-              >
-                {book.approved ? "Approved" : "Not Approved"}
-              </span>
-              <button
-                className="approval-button"
-                onClick={() => approveBook(book._id, true)}
-              >
-                Approve
-              </button>
-              <button
-                className="disapproval-button"
-                onClick={() => approveBook(book._id, false)}
-              >
-                Disapprove
-              </button>
-              <button
-                className="delete-button"
-                onClick={() => handleDeleteBook(book._id)}
-              >
-                Delete
-              </button>
-            </li>
-          ))}
-        </ul>
+        <h2 className="section-title">Books ({books.length})</h2>
+        {genres.map((genre) => (
+          <div key={genre} className="genre-section">
+            <h3 className="genre-title">{genre} ({groupBooksByGenre()[genre].length})</h3>
+            <table className="book-table">
+              <thead>
+                <tr>
+                  <th>Book Name</th>
+                  <th>Genre</th>
+                  <th>Approval Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {groupBooksByGenre()[genre].map((book) => (
+                  <tr key={book._id}>
+                    <td>{book.bookName}</td>
+                    <td>{book.genre}</td>
+                    <td>
+                      <span className={`approval-status ${book.approved ? "approved" : "not-approved"}`}>
+                        {book.approved ? "Approved" : "Not Approved"}
+                      </span>
+                    </td>
+                    <td>
+                      <button className="approval-button" onClick={() => approveBook(book._id, true)}>
+                        Approve
+                      </button>
+                      <button className="disapproval-button" onClick={() => approveBook(book._id, false)}>
+                        Disapprove
+                      </button>
+                      <button className="delete-button" onClick={() => handleDeleteBook(book._id)}>
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ))}
       </div>
     </div>
   );
