@@ -1,0 +1,98 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Container Styles */
+  .app-suggest-book-list-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Title Styles */
+  .app-suggest-book-list-title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Book List Styles */
+  .app-suggest-book-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  /* Book Item Styles */
+  .app-suggest-book-item {
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 30%;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+  }
+  
+  .app-suggest-book-item:hover {
+    color: #e65c4f;
+    box-shadow: 0 0 10px rgba(230, 92, 79, 0.5);
+  }
+  
+  /* Book Title Styles */
+  .app-suggest-book-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .app-suggest-book-item:hover .app-suggest-book-title {
+    color: #333;
+  }
+  
+  /* Book Image Styles */
+  .app-suggest-book-image-container {
+    margin-bottom: 10px;
+  }
+  
+  .app-suggest-book-image {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Book Download Button Styles */
+  .app-suggest-book-download-link {
+    margin-top: 10px;
+  }
+  
+  .app-suggest-book-download-btn {
+    display: inline-block;
+    background-color: #ff6347;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .app-suggest-book-download-btn:hover {
+    background-color: #3e8e41;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .app-suggest-book-item {
+      width: 45%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .app-suggest-book-item {
+      width: 100%;
+    }
+  }
