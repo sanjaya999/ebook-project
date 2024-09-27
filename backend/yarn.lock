@@ -213,10 +213,10 @@
     "@babel/helper-validator-identifier" "^7.22.20"
     to-fast-properties "^2.0.0"
 
-"@esbuild/win32-x64@0.19.12":
+"@esbuild/linux-x64@0.19.12":
   version "0.19.12"
-  resolved "https://registry.npmjs.org/@esbuild/win32-x64/-/win32-x64-0.19.12.tgz"
-  integrity sha512-T1QyPSDCyMXaO3pzBkF96E8xMkiRYbUEZADd29SyPGabqxMViNoii+NcK7eWJAEoU6RZyEm5lVSIjTmcdoB9HA==
+  resolved "https://registry.npmjs.org/@esbuild/linux-x64/-/linux-x64-0.19.12.tgz"
+  integrity sha512-B71g1QpxfwBvNrfyJdVDexenDIt1CiDN1TIXLbhOw0KhJzE78KIFGX6OJ9MrtC0oOqMWf+0xop4qEU8JrJTwCg==
 
 "@eslint-community/eslint-utils@^4.2.0":
   version "4.4.0"
@@ -349,10 +349,10 @@
   resolved "https://registry.npmjs.org/@remix-run/router/-/router-1.15.0.tgz"
   integrity sha512-HOil5aFtme37dVQTB6M34G95kPM3MMuqSmIRVCC52eKV+Y/tGSqw9P3rWhlAx6A+mz+MoX+XxsGsNJbaI5qCgQ==
 
-"@rollup/rollup-win32-x64-msvc@4.10.0":
+"@rollup/rollup-linux-x64-gnu@4.10.0":
   version "4.10.0"
-  resolved "https://registry.npmjs.org/@rollup/rollup-win32-x64-msvc/-/rollup-win32-x64-msvc-4.10.0.tgz"
-  integrity sha512-OZoJd+o5TaTSQeFFQ6WjFCiltiYVjIdsXxwu/XZ8qRpsvMQr4UsVrE5UyT9RIvsnuF47DqkJKhhVZ2Q9YW9IpQ==
+  resolved "https://registry.npmjs.org/@rollup/rollup-linux-x64-gnu/-/rollup-linux-x64-gnu-4.10.0.tgz"
+  integrity sha512-w/5OpT2EnI/Xvypw4FIhV34jmNqU5PZjZue2l2Y3ty1Ootm3SqhI+AmfhlUYGBTd9JnpneZCDnt3uNOiOBkMyw==
 
 "@types/babel__core@^7.20.5":
   version "7.20.5"
