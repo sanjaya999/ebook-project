@@ -24,8 +24,8 @@ function Foryou() {
         };
         const response = await axios.get(
           isLoggedIn === 'true'
-            ? 'http://localhost:5000/api/v1/user/explore'
-            : 'http://localhost:5000/api/v1/user/notLoggedin',
+            ? 'https://ebook-project-rho.vercel.app/api/v1/user/explore'
+            : 'https://ebook-project-rho.vercel.app/api/v1/user/notLoggedin',
           isLoggedIn === 'true' ? config : {}
         );
         console.log(response.data.data);

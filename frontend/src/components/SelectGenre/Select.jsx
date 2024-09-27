@@ -35,7 +35,7 @@ const Select = () => {
       };
 
       const response = await axios.put(
-        `http://localhost:5000/api/v1/user/updateGenre`,
+        `https://ebook-project-rho.vercel.app/api/v1/user/updateGenre`,
         { userId , genres: selectedGenres }, // Send the user ID in the request body
         
         config

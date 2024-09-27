@@ -24,7 +24,7 @@ function Explore() {
           },
         };
         const response = await axios.get(
-          'http://localhost:5000/api/v1/user/explore',
+          'https://ebook-project-rho.vercel.app/api/v1/user/explore',
           config
         );
         const filterBook = response.data.data.filter((book) => book.approved === true);
@@ -48,7 +48,7 @@ function Explore() {
         const userId = window.localStorage.getItem("userID");
   
         const response = await axios.post(
-          `http://localhost:5000/api/v1/user/getbookmarks`,
+          `https://ebook-project-rho.vercel.app/api/v1/user/getbookmarks`,
           { userId }, // Send the user ID in the request body
           config
         );
@@ -77,7 +77,7 @@ function Explore() {
       const fetchNotLoggedInBooks = async () => {
         try {
           const response = await axios.get(
-            'http://localhost:5000/api/v1/user/notLoggedin'
+            'https://ebook-project-rho.vercel.app/api/v1/user/notLoggedin'
           );
           const filterBook = response.data.data.filter((book) => book.approved === true);
           setBooks(filterBook);
@@ -108,7 +108,7 @@ function Explore() {
       const isBookmarked = bookmarkedIds.includes(bookId);
       const response = await axios({
         method: isBookmarked ? 'DELETE' : 'POST',
-        url: `http://localhost:5000/api/v1/user/bookmarks/${ bookId }`,
+        url: `https://ebook-project-rho.vercel.app/api/v1/user/bookmarks/${ bookId }`,
         headers: config.headers,
         
       });

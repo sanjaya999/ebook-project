@@ -26,7 +26,7 @@ const Suggest = () => {
           console.log("this is fetch" + userId);
   
           const response = await axios.post(
-            `http://localhost:5000/api/v1/user/fetchGenre`,
+            `https://ebook-project-rho.vercel.app/api/v1/user/fetchGenre`,
             { userId },
             config
           );
@@ -49,7 +49,7 @@ const Suggest = () => {
         const userId = window.localStorage.getItem("userID");
 
         const response = await axios.post(
-          `http://localhost:5000/api/v1/user/getbookmarks`,
+          `https://ebook-project-rho.vercel.app/api/v1/user/getbookmarks`,
           { userId },
           config
         );
@@ -80,7 +80,7 @@ const Suggest = () => {
       const isBookmarked = bookmarkedIds.includes(bookId);
       const response = await axios({
         method: isBookmarked ? 'DELETE' : 'POST',
-        url: `http://localhost:5000/api/v1/user/bookmarks/${bookId}`,
+        url: `https://ebook-project-rho.vercel.app/api/v1/user/bookmarks/${bookId}`,
         headers: config.headers,
       });
 

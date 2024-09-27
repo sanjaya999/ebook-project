@@ -22,14 +22,14 @@ function Top() {
             },
           };
           response = await axios.get(
-            'http://localhost:5000/api/v1/user/topPicks',
+            'https://ebook-project-rho.vercel.app/api/v1/user/topPicks',
             config
           );
           const filteredBooks = response.data.data.filter(book => book.approved === true);
           const sortedBooks = filteredBooks.sort((a, b) => b.accessCount - a.accessCount);
           setBooks(sortedBooks); 
         } else {
-          response = await axios.get('http://localhost:5000/api/v1/user/notLoggedin');
+          response = await axios.get('https://ebook-project-rho.vercel.app/api/v1/user/notLoggedin');
           console.log(response.data.data)
           const filteredBooks = response.data.data.filter(book => book.approved === true);
           const sortedBooks = filteredBooks.sort((a, b) => b.accessCount - a.accessCount);

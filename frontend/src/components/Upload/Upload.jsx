@@ -52,7 +52,7 @@ function Upload() {
       formData.append('bookFile', book.bookFile);
       formData.append('genre', book.genre); // Add genre to the form data
 
-      const response = await axios.post('http://localhost:5000/api/v1/user/upload', formData, {
+      const response = await axios.post('https://ebook-project-rho.vercel.app/api/v1/user/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${token}`

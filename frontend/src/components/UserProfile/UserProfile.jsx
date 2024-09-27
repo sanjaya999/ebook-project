@@ -27,7 +27,7 @@ function UserProfile() {
           params: { _id },
         };
         const response = await axios.get(
-          "http://localhost:5000/api/v1/user/userId",
+          "https://ebook-project-rho.vercel.app/api/v1/user/userId",
           config,
           data
         );
@@ -47,7 +47,7 @@ function UserProfile() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/v1/user/changePassword",
+        "https://ebook-project-rho.vercel.app/api/v1/user/changePassword",
         {
           oldPassword,
           newPassword,
@@ -80,7 +80,7 @@ function UserProfile() {
         const userId = window.localStorage.getItem("userID");
 
         const response = await axios.post(
-          `http://localhost:5000/api/v1/user/getbookmarks`,
+          `https://ebook-project-rho.vercel.app/api/v1/user/getbookmarks`,
           { userId },
           config
         );
@@ -116,7 +116,7 @@ function UserProfile() {
       const isBookmarked = bookmarkedIds.includes(bookId);
       const response = await axios({
         method: isBookmarked ? 'DELETE' : 'POST',
-        url: `http://localhost:5000/api/v1/user/bookmarks/${bookId}`,
+        url: `https://ebook-project-rho.vercel.app/api/v1/user/bookmarks/${bookId}`,
         headers: config.headers,
       });
 

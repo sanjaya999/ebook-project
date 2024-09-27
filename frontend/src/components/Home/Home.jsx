@@ -24,12 +24,12 @@ function Home() {
           },
         };
         response = await axios.get(
-          `http://localhost:5000/api/v1/user/search?searchTerm=${searchTerm}`,
+          `https://ebook-project-rho.vercel.app/api/v1/user/search?searchTerm=${searchTerm}`,
           config
         );
       } else {
         response = await axios.get(
-          `http://localhost:5000/api/v1/user/search?searchTerm=${searchTerm}`
+          `https://ebook-project-rho.vercel.app/api/v1/user/search?searchTerm=${searchTerm}`
         );
       }
 
