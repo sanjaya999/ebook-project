@@ -86,14 +86,8 @@ function Login() {
                 setCookie('isAdmin', admin, {path: '/', expires, sameSite: 'None', secure: true })
                 navigate("/admin")
             }
+       
             
-            if(response.data.data.user.isApproved == false){
-                alert(" Please wait till admin approves this user")
-      
-    
-                window.location.href = "/Login"
-                
-            }
             else{
                 if(response.status) { 
                     window.localStorage.setItem("token" , accessToken)
