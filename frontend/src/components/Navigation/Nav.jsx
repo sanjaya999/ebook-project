@@ -18,7 +18,7 @@ function Nav() {
 
     const {user ,logout ,accessToken} = useContext(UserContext);
     
-    const name = window.localStorage.getItem("username")
+    const token = localStorage.getItem("token")
     const handleLogout = ()=>{
        
        
@@ -76,7 +76,7 @@ function Nav() {
                 Top Picks
               </NavLink>
             </li>
-            {name ?(
+            {token ?(
               <li className="start">
                  <NavLink to="/suggest" className ={ ({isActive})=> `${isActive? "yes-nav-text" : "no-nav-text"}`}>
                 Recommendation

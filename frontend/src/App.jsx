@@ -25,7 +25,7 @@ const App = () =>{
 
 
   useEffect(() => {
-    const loggedIn = cookies.accessToken && cookies.refreshToken && cookies.isApproved == true;
+    const loggedIn = localStorage.getItem("token")
     const isAdmin = cookies.isAdmin
 
     setisAdmin(isAdmin)
