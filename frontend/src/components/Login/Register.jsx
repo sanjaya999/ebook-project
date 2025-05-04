@@ -112,7 +112,6 @@ useEffect(() => {
 
           <div className='profile'>
          <label htmlFor="profile" className='label'>Profile Picture</label><br />
-        <input type="file" name='profile' onChange={handleInput} id='profile' />
         </div>
        
 
