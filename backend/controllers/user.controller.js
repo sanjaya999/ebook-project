@@ -53,25 +53,13 @@ const registerUser = asyncHandler(async(req,res) => {
 
         }
 
-    //   req.body gives access by express and req.files is by multer middleware
-        let profileUrl = "";
-
-        const profileLocalPath = req.files?.profile?.[0]?.path;
-    if (profileLocalPath) {
-        const profile = await uploadOnCloudinary(profileLocalPath);
-        if (profile?.url) {
-            profileUrl = profile.url;
-        }
-    }
-
-
+    
 
         const user =   await User.create({
             fullName ,
             
             email,
             password,
-            profile : profile.url || "",
             newUser : true,
             
 
