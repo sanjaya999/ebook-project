@@ -19,6 +19,7 @@ function Nav() {
     const {user ,logout ,accessToken} = useContext(UserContext);
     
     const token = localStorage.getItem("token")
+    const name = localStorage.getItem("username")
     const handleLogout = ()=>{
        
        
