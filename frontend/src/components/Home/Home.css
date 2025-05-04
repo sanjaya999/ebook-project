@@ -194,3 +194,23 @@ body {
 .book-download:hover {
   background-color: #e65c4f;
 }
+
+.download-app {
+  margin-top: 60px;
+}
+
+.download-link {
+  background-color: #e65c4f;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-size: 18px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.download-link:hover {
+  background-color: #e65c4f;
+}

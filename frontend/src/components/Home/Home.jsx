@@ -111,6 +111,16 @@ function Home() {
           </>
         )}
       </div>
+      <div className="download-app">
+  <a
+    href="/ebook.apk"
+    className="download-link"
+    download
+  >
+    📱 Download Android App - Click Here
+  </a>
+</div>
+
 
       <div className="section">
         <Link to="/top" className="Top100">
