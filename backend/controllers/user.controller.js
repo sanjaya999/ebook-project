@@ -64,11 +64,7 @@ const registerUser = asyncHandler(async(req,res) => {
         }
     }
 
-          const profile = await uploadOnCloudinary(profileLocalPath)
 
-        if(!profile){
-            throw new ApiError(400 , "profile is requried")
-         }
 
         const user =   await User.create({
             fullName ,
