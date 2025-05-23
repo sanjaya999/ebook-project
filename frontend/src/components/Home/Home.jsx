@@ -113,7 +113,7 @@ function Home() {
       </div>
       <div className="download-app">
   <a
-    href="/ebook.apk"
+    href="/ebook-app.apk"
     className="download-link"
     download
   >
